@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:jest/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "import"
+  ],
+  "rules": {
+    "import/no-default-export": 2
+  }
+}

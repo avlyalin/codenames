@@ -1,0 +1,12 @@
+.card {
+    box-sizing: border-box;
+    width: 200px;
+    padding: 2em 1em;
+    border: 2px solid #2d2d2f;
+    border-radius: 3px;
+    cursor: pointer;
+    text-align: center;
+}
+.card--selected {
+    opacity: 0.3;
+}
