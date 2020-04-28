@@ -67,6 +67,7 @@ class App extends Component {
         this.setState({ settings, inGame: false });
       });
       FirebaseService.onChangeUsers(sessionId, (users) => {
+        console.log('change users');
         this.setState({ users: users });
       });
       FirebaseService.onChangeCards(sessionId, (cards) => {
@@ -127,7 +128,7 @@ class App extends Component {
           <Lobby
             settings={this.state.settings}
             users={this.state.users}
-            username={this.state.currentUser.name}
+            currentUser={this.state.currentUser}
             onChangeUsername={this.saveUsername.bind(this)}
             onChangeSettings={this.saveSettings.bind(this)}
             onClickPlay={this.startGame.bind(this)}

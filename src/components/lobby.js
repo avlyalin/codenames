@@ -4,7 +4,8 @@ import { CARDS_DICTIONARIES, FIELD_SIZES } from '../data/constants';
 
 function Lobby({
   settings,
-  username,
+  users,
+  currentUser,
   onChangeSettings,
   onChangeUsername,
   onClickPlay,
@@ -51,25 +52,39 @@ function Lobby({
       );
     }
   );
-
+  const usersList = Object.entries(users).map(([userId, user]) => {
+    let username = user.name;
+    if (currentUser.id === userId) {
+      username += ' (вы)';
+    }
+    return <li key={userId}>{username}</li>;
+  });
   return (
     <>
-      <p>Размер поля:</p>
-      {fieldSizes}
-      <p>Словарь:</p>
-      {dictionaries}
-      <p>
+      <section>
+        <h3>Размер поля:</h3>
+        {fieldSizes}
+      </section>
+      <section>
+        <h3>Словарь:</h3>
+        {dictionaries}
+      </section>
+      <section>
+        <h3>Игрок</h3>
         <label>
           Ваш ник:
           <br />
           <input
             type="text"
-            value={username}
+            value={currentUser.name}
             onChange={(e) => onChangeUsername(e.target.value)}
           />
         </label>
-      </p>
-      <br />
+      </section>
+      <section>
+        <h3>Список игроков:</h3>
+        <ul>{usersList}</ul>
+      </section>
       <button onClick={onClickPlay}>Играть!</button>
     </>
   );
@@ -82,7 +97,10 @@ Lobby.propTypes = {
     dictionary: PropTypes.string.isRequired,
   }).isRequired,
   users: PropTypes.object.isRequired,
-  username: PropTypes.string.isRequired,
+  currentUser: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
   onChangeUsername: PropTypes.func.isRequired,
   onClickPlay: PropTypes.func.isRequired,
   onChangeSettings: PropTypes.func.isRequired,
