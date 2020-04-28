@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CARDS_DICTIONARIES, FIELD_SIZES } from '../data/constants';
+import {
+  CARDS_COLORS,
+  CARDS_DICTIONARIES,
+  FIELD_SIZES,
+} from '../data/constants';
+import styles from './lobby.module.css';
+import { Team } from './team';
 
 function Lobby({
   settings,
@@ -9,6 +15,8 @@ function Lobby({
   onChangeSettings,
   onChangeUsername,
   onClickPlay,
+  onJoinTeam,
+  onJoinTeamAsCaptain,
 }) {
   const onChangeFieldSize = (e) => {
     onChangeSettings({ ...settings, fieldSize: e.target.value });
@@ -85,7 +93,31 @@ function Lobby({
         <h3>Список игроков:</h3>
         <ul>{usersList}</ul>
       </section>
-      <button onClick={onClickPlay}>Играть!</button>
+      <section>
+        <h3>Команды</h3>
+        <div className={styles.teams}>
+          <Team
+            name="Красные"
+            team={CARDS_COLORS['red']}
+            currentUser={currentUser}
+            users={users}
+            onJoin={onJoinTeam}
+            onJoinAsCaptain={onJoinTeamAsCaptain}
+            onLeave={onLeaveTeam}
+          />
+          <Team
+            name="Синие"
+            team={CARDS_COLORS['blue']}
+            currentUser={currentUser}
+            users={users}
+            onJoin={onJoinTeam}
+            onJoinAsCaptain={onJoinTeamAsCaptain}
+          />
+        </div>
+      </section>
+      <div className={styles.buttonPlay}>
+        <button onClick={onClickPlay}>Играть!</button>
+      </div>
     </>
   );
 }
@@ -104,6 +136,8 @@ Lobby.propTypes = {
   onChangeUsername: PropTypes.func.isRequired,
   onClickPlay: PropTypes.func.isRequired,
   onChangeSettings: PropTypes.func.isRequired,
+  onJoinTeam: PropTypes.func.isRequired,
+  onJoinTeamAsCaptain: PropTypes.func.isRequired,
 };
 
 export { Lobby };

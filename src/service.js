@@ -120,20 +120,6 @@ export async function updateSettings(
   });
 }
 
-/** //todo: удалить, слушать всех юзеров?
- * Обновление данных юзера
- * @param sessionId
- * @param id
- * @param name
- * @returns {Promise<any>}
- */
-export async function updateUsername(sessionId, { id, name }) {
-  const userRef = getUserRef(sessionId, id);
-  return userRef.update({
-    name,
-  });
-}
-
 /**
  * listener настроек
  * @param sessionId
@@ -144,6 +130,18 @@ export function onChangeSettings(sessionId, callback) {
   settingsRef.on('value', (snapshot) => {
     callback(snapshot.val());
   });
+}
+
+/**
+ * Обновление данных юзера
+ * @param sessionId
+ * @param id
+ * @param name
+ * @returns {Promise<any>}
+ */
+export async function updateUser(sessionId, { id, ...rest }) {
+  const userRef = getUserRef(sessionId, id);
+  return userRef.update(rest);
 }
 
 /**
@@ -178,6 +176,8 @@ function getUser() {
   const username = LocalStorage.getUsername() || 'Неизвестный';
   return {
     name: username,
+    team: '',
+    role: '',
   };
 }
 

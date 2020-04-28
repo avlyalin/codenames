@@ -1,7 +1,12 @@
 import { hot } from 'react-hot-loader/root';
 import React, { Component } from 'react';
 import * as FirebaseService from '../service';
-import { LANGUAGES, FIELD_SIZES, CARDS_DICTIONARIES } from '../data/constants';
+import {
+  LANGUAGES,
+  FIELD_SIZES,
+  CARDS_DICTIONARIES,
+  USERS_ROLES,
+} from '../data/constants';
 import { getGameSessionId } from '../utils/query-params';
 import { getGamingCards } from '../utils/data-provider';
 import * as LocalStorage from '../utils/local-storage';
@@ -90,7 +95,7 @@ class App extends Component {
       this.setState({
         currentUser: { ...currentUser, name: name },
       });
-      FirebaseService.updateUsername(this.sessionId, {
+      FirebaseService.updateUser(this.sessionId, {
         id: currentUser.id,
         name,
       });
@@ -105,6 +110,22 @@ class App extends Component {
     });
     const cards = getGamingCards(dictionary, fieldSize);
     FirebaseService.setCards(this.sessionId, cards);
+  }
+
+  joinTeam(team) {
+    FirebaseService.updateUser(this.sessionId, {
+      id: this.state.currentUser.id,
+      team,
+      role: USERS_ROLES['player'],
+    });
+  }
+
+  joinTeamAsCaptain(team) {
+    FirebaseService.updateUser(this.sessionId, {
+      id: this.state.currentUser.id,
+      team,
+      role: USERS_ROLES['captain'],
+    });
   }
 
   startGame() {
@@ -132,6 +153,8 @@ class App extends Component {
             onChangeUsername={this.saveUsername.bind(this)}
             onChangeSettings={this.saveSettings.bind(this)}
             onClickPlay={this.startGame.bind(this)}
+            onJoinTeam={this.joinTeam.bind(this)}
+            onJoinTeamAsCaptain={this.joinTeamAsCaptain.bind(this)}
           />
         )}
       </div>

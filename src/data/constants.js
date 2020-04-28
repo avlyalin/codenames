@@ -23,3 +23,8 @@ export const CARDS_COLORS = {
   blue: 'blue',
   red: 'red',
 };
+
+export const USERS_ROLES = {
+  captain: 'captain',
+  player: 'player',
+};
