@@ -1,25 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './card.module.css';
 
-class Card extends Component {
-  handleClick() {
-    this.props.onSelect(this.props.id);
-  }
-
-  render() {
-    const { text, opened } = this.props.card;
-    const cardClass = classnames({
-      [styles.card]: true,
-      [styles['card--selected']]: opened,
-    });
-    return (
-      <div className={cardClass} onClick={this.handleClick.bind(this)}>
-        <span>{text}</span>
-      </div>
-    );
-  }
+function Card({ id, card, onOpen }) {
+  const { text, opened } = card;
+  const cardClass = classnames({
+    [styles.card]: true,
+    [styles['card--selected']]: opened,
+  });
+  return (
+    <div className={cardClass} onClick={() => onOpen(id)}>
+      <span>{text}</span>
+    </div>
+  );
 }
 
 Card.propTypes = {
@@ -30,7 +24,7 @@ Card.propTypes = {
     opened: PropTypes.bool.isRequired,
     color: PropTypes.string,
   }).isRequired,
-  onSelect: PropTypes.func.isRequired,
+  onOpen: PropTypes.func.isRequired,
 };
 
 export { Card };

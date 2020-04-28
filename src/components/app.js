@@ -4,6 +4,7 @@ import * as FirebaseService from '../service';
 import { LANGUAGES, FIELD_SIZES, CARDS_DICTIONARIES } from '../data/constants';
 import { getGameSessionId } from '../utils/query-params';
 import { getGamingCards } from '../utils/data-provider';
+import * as LocalStorage from '../utils/local-storage';
 import { Lobby } from './lobby';
 import { PlayingField } from './playing-field';
 
@@ -19,41 +20,56 @@ class App extends Component {
       },
       users: {},
       cards: [],
+      currentUser: {
+        id: '',
+        name: '',
+      },
     };
   }
 
   async componentDidMount() {
+    const username = LocalStorage.getUsername() || '';
+    this.setState({
+      currentUser: { ...this.state.currentUser, name: username },
+    });
     await this.connectToSession();
   }
 
   async connectToSession() {
     try {
-      let gameSessionId = getGameSessionId(window.location.href);
+      let sessionId = getGameSessionId(window.location.href);
+      let userId;
 
-      if (gameSessionId) {
-        const sessionExists = await FirebaseService.checkSession(gameSessionId);
+      if (sessionId) {
+        const sessionExists = await FirebaseService.checkSession(sessionId);
         if (!sessionExists) {
           throw new Error('Сессия не найдена');
         }
-        await FirebaseService.joinSession(gameSessionId);
+        ({ userId } = await FirebaseService.joinSession(sessionId));
         console.log('joined session');
       } else {
-        gameSessionId = await FirebaseService.initialize(this.state.settings);
-        const cards = this.generateGamingCards();
-        await FirebaseService.setCards(gameSessionId, cards);
-        console.log('new session created');
+        ({ sessionId, userId } = await FirebaseService.initialize(
+          this.state.settings
+        ));
+        const cards = getGamingCards(
+          this.state.settings.dictionary,
+          this.state.settings.fieldSize
+        );
+        await FirebaseService.setCards(sessionId, cards);
+        console.log(`session with id ${sessionId} created`);
       }
+      this.sessionId = sessionId;
+      this.setState({
+        currentUser: { ...this.state.currentUser, id: userId },
+      });
 
-      this.sessionId = gameSessionId;
-      console.log(gameSessionId);
-      FirebaseService.onChangeSettings(
-        gameSessionId,
-        this.onDbSettingsChange.bind(this)
-      );
-      FirebaseService.onChangeUsers(gameSessionId, (users) => {
+      FirebaseService.onChangeSettings(sessionId, (settings) => {
+        this.setState({ settings, inGame: false });
+      });
+      FirebaseService.onChangeUsers(sessionId, (users) => {
         this.setState({ users: users });
       });
-      FirebaseService.onChangeCards(gameSessionId, (cards) => {
+      FirebaseService.onChangeCards(sessionId, (cards) => {
         this.setState({ cards: cards });
         console.log('cards fetched...');
       });
@@ -62,32 +78,37 @@ class App extends Component {
     }
   }
 
-  onDbSettingsChange(settings) {
-    this.setState({ settings: settings });
-    // сбросить игру
+  saveCard(cardId) {
+    FirebaseService.updateCard(this.sessionId, cardId);
   }
 
-  saveSelectedCard(cardId) {
-    FirebaseService.openCard(this.sessionId, cardId).then(() => {
-      console.log(`card ${cardId} opened`);
+  saveUsername(name) {
+    const currentUser = this.state.currentUser;
+    if (currentUser.name !== name) {
+      LocalStorage.setUsername(name);
+      this.setState({
+        currentUser: { ...currentUser, name: name },
+      });
+      FirebaseService.updateUsername(this.sessionId, currentUser);
+    }
+  }
+
+  saveSettings({ language, dictionary, fieldSize }) {
+    FirebaseService.updateSettings(this.sessionId, {
+      language,
+      dictionary,
+      fieldSize,
     });
-  }
-
-  updateUser(username) {
-    // todo
-  }
-
-  updateSettings({ language, dictionary, fieldSize }) {
-    // todo
-  }
-
-  generateGamingCards() {
-    const { settings } = this.state;
-    return getGamingCards(settings.dictionary, settings.fieldSize);
+    const cards = getGamingCards(dictionary, fieldSize);
+    FirebaseService.setCards(this.sessionId, cards);
   }
 
   startGame() {
     this.setState({ inGame: true });
+  }
+
+  stopGame() {
+    this.setState({ inGame: false });
   }
 
   render() {
@@ -96,14 +117,16 @@ class App extends Component {
         {this.state.inGame ? (
           <PlayingField
             cards={this.state.cards}
-            onSelectCard={this.saveSelectedCard.bind(this)}
+            onOpenCard={this.saveCard.bind(this)}
+            onClickBack={this.stopGame.bind(this)}
           />
         ) : (
           <Lobby
             settings={this.state.settings}
             users={this.state.users}
-            onUpdateUser={this.updateUser}
-            onChangeSettings={this.updateSettings}
+            username={this.state.currentUser.name}
+            onChangeUsername={this.saveUsername.bind(this)}
+            onChangeSettings={this.saveSettings.bind(this)}
             onClickPlay={this.startGame.bind(this)}
           />
         )}

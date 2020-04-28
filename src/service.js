@@ -22,7 +22,7 @@ const DB_CARDS_REF = process.env.DB_CARDS_REF;
  * @param language
  * @param fieldSize
  * @param dictionary
- * @returns {Promise<string>}
+ * @returns {Promise<{sessionId: string, userId: string}>}
  */
 export async function initialize({ language, fieldSize, dictionary }) {
   const sessionRef = database.ref(DB_SESSIONS_REF).push();
@@ -37,7 +37,8 @@ export async function initialize({ language, fieldSize, dictionary }) {
     },
   };
 
-  const userPath = pushUser(sessionId);
+  const userId = pushUser(sessionId);
+  const userPath = getUserPath(sessionId, userId);
   const newUser = getUser();
 
   const updates = {
@@ -45,19 +46,25 @@ export async function initialize({ language, fieldSize, dictionary }) {
     [userPath]: newUser,
   };
   await database.ref().update(updates);
-  return sessionId;
+  return { sessionId, userId };
 }
 
 /**
  * Присоединение к сессии
  * @param sessionId
- * @returns {Promise<void>}
+ * @returns {Promise<{sessionId: *, userId: string}>}
  */
 export async function joinSession(sessionId) {
-  if (LocalStorage.getSessionUser(sessionId)) return;
-  const user = getUser(sessionId);
-  const userPath = pushUser(sessionId);
+  let user = LocalStorage.getSessionUser(sessionId);
+  if (user) {
+    return { sessionId, userId: user.userId };
+  }
+  user = getUser(sessionId);
+  const userId = pushUser(sessionId);
+  const userPath = getUserPath(sessionId, userId);
   await database.ref(userPath).set(user);
+  LocalStorage.setUserToSession(sessionId, { userId });
+  return { sessionId, userId };
 }
 
 /**
@@ -88,7 +95,7 @@ export async function setCards(sessionId, cards) {
  * @param cardId
  * @returns {Promise<any>}
  */
-export async function openCard(sessionId, cardId) {
+export async function updateCard(sessionId, cardId) {
   const cardRef = getCardsRef(sessionId).child(cardId);
   return cardRef.update({ opened: true });
 }
@@ -117,13 +124,13 @@ export async function updateSettings(
  * Обновление данных юзера
  * @param sessionId
  * @param id
- * @param username
+ * @param name
  * @returns {Promise<any>}
  */
-export async function updateUser(sessionId, { id, username }) {
-  const userRef = getUsersRef(sessionId).child(id);
+export async function updateUsername(sessionId, { id, name }) {
+  const userRef = getUserRef(sessionId);
   return userRef.update({
-    username,
+    name,
   });
 }
 
@@ -164,9 +171,7 @@ export function onChangeCards(sessionId, callback) {
 }
 
 function pushUser(sessionId) {
-  const userId = getUsersRef(sessionId).push().key;
-  const usersPath = getUsersPath(sessionId);
-  return `${usersPath}/${userId}`;
+  return getUsersRef(sessionId).push().key;
 }
 
 function getUser() {
@@ -201,6 +206,16 @@ function getUsersPath(sessionId) {
 function getUsersRef(sessionId) {
   const usersPath = getUsersPath(sessionId);
   return database.ref(usersPath);
+}
+
+function getUserPath(sessionId, userId) {
+  const usersPath = getUsersPath(sessionId);
+  return `${usersPath}/${userId}`;
+}
+
+function getUserRef(sessionId, userId) {
+  const userPath = getUserPath(sessionId, userId);
+  return database.ref(userPath);
 }
 
 function getCardsPath(sessionId) {
