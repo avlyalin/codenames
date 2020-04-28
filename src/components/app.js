@@ -89,7 +89,10 @@ class App extends Component {
       this.setState({
         currentUser: { ...currentUser, name: name },
       });
-      FirebaseService.updateUsername(this.sessionId, currentUser);
+      FirebaseService.updateUsername(this.sessionId, {
+        id: currentUser.id,
+        name,
+      });
     }
   }
 

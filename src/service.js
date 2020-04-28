@@ -128,7 +128,7 @@ export async function updateSettings(
  * @returns {Promise<any>}
  */
 export async function updateUsername(sessionId, { id, name }) {
-  const userRef = getUserRef(sessionId);
+  const userRef = getUserRef(sessionId, id);
   return userRef.update({
     name,
   });
@@ -177,7 +177,7 @@ function pushUser(sessionId) {
 function getUser() {
   const username = LocalStorage.getUsername() || 'Неизвестный';
   return {
-    username: username,
+    name: username,
   };
 }
 
