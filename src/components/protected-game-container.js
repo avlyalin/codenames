@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import * as Errors from '../data/errors';
-import { PlayingField } from './playing-field';
 import { getGameSessionId } from '../utils/query-params';
 import { TEAMS } from '../data/constants';
+import { GameContainer } from './game-container';
 
-function ProtectedPlayingField({ sessionId, connected, ...rest }) {
+function ProtectedGameContainer({ sessionId, connected, ...rest }) {
   const querySessionId = getGameSessionId(window.location.href);
 
   if (!connected && !querySessionId) {
@@ -23,10 +23,10 @@ function ProtectedPlayingField({ sessionId, connected, ...rest }) {
       </div>
     );
   }
-  return <PlayingField {...rest} />;
+  return <GameContainer {...rest} />;
 }
 
-ProtectedPlayingField.propTypes = {
+ProtectedGameContainer.propTypes = {
   connected: PropTypes.bool.isRequired,
   sessionId: PropTypes.string.isRequired,
   captains: PropTypes.shape({
@@ -49,4 +49,4 @@ ProtectedPlayingField.propTypes = {
   onOpenCard: PropTypes.func.isRequired,
 };
 
-export { ProtectedPlayingField };
+export { ProtectedGameContainer };

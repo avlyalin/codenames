@@ -2,12 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './card.module.css';
+import { CARDS_TYPES, TEAMS } from '../data/constants';
 
-function Card({ id, card, onOpen }) {
-  const { text, opened } = card;
+function Card({ id, card, isCaptain, onOpen }) {
+  const { text, type, color, opened } = card;
+  const disclosed = opened || isCaptain;
   const cardClass = classnames({
     [styles.card]: true,
-    [styles['card--selected']]: opened,
+    [styles.cardOpened]: opened,
+    [styles.cardBlue]: disclosed && color === TEAMS['blue'],
+    [styles.cardRed]: disclosed && color === TEAMS['red'],
+    [styles.cardKiller]: disclosed && type === CARDS_TYPES['killer'],
   });
   return (
     <div className={cardClass} onClick={() => onOpen(id)}>

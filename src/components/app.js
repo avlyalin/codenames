@@ -11,7 +11,7 @@ import {
 import { getGameSessionId } from '../utils/query-params';
 import { Lobby } from './lobby';
 import { NotFound } from './not-found';
-import { ProtectedPlayingField } from './protected-playing-field';
+import { ProtectedGameContainer } from './protected-game-container';
 
 class App extends Component {
   constructor(props) {
@@ -153,7 +153,7 @@ class App extends Component {
             />
           </Route>
           <Route path="/game">
-            <ProtectedPlayingField
+            <ProtectedGameContainer
               connected={this.state.connected}
               sessionId={this.sessionId}
               captains={this.state.captains}

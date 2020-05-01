@@ -1,24 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card } from './card';
-import styles from './playing-field.module.css';
 import { TEAMS } from '../data/constants';
+import styles from './game-container.module.css';
+import { GameField } from './game-field';
+import { GameStatusBar } from './game-status-bar';
 
-function PlayingField({ cards, onOpenCard }) {
+function GameContainer(props) {
   return (
-    <div>
-      <div className={styles.container}>
-        {cards.map((card, index) => {
-          return (
-            <Card card={card} onOpen={onOpenCard} id={index} key={index} />
-          );
-        })}
-      </div>
+    <div className={styles.container}>
+      <GameStatusBar cards={props.cards} />
+      <GameField {...props} />
     </div>
   );
 }
 
-PlayingField.propTypes = {
+GameContainer.propTypes = {
   captains: PropTypes.shape({
     blue: PropTypes.string.isRequired,
     red: PropTypes.string.isRequired,
@@ -39,4 +35,4 @@ PlayingField.propTypes = {
   onOpenCard: PropTypes.func.isRequired,
 };
 
-export { PlayingField };
+export { GameContainer };
