@@ -40,5 +40,6 @@ module.exports = {
     compress: true,
     contentBase: path.join(__dirname, 'assets'),
     watchContentBase: true,
+    historyApiFallback: true,
   },
 };

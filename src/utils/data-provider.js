@@ -1,6 +1,6 @@
 import dictionaries from '../data/dictionaries';
 import {
-  CARDS_COLORS,
+  TEAMS,
   CARDS_DICTIONARIES,
   CARDS_TYPES,
   FIELD_SIZES,
@@ -28,7 +28,7 @@ export function getGamingCards(
       type: CARDS_TYPES['agent'],
       text: wordsGenerator.next().value,
       opened: false,
-      color: CARDS_COLORS['blue'],
+      color: TEAMS['blue'],
     };
     cards.push(blueCard);
   }
@@ -38,7 +38,7 @@ export function getGamingCards(
       type: CARDS_TYPES['agent'],
       text: wordsGenerator.next().value,
       opened: false,
-      color: CARDS_COLORS['red'],
+      color: TEAMS['red'],
     };
     cards.push(redCard);
   }

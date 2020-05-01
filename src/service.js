@@ -1,6 +1,9 @@
-import * as LocalStorage from './utils/local-storage';
 import firebase from 'firebase/app';
 import 'firebase/database';
+import * as LocalStorage from './utils/local-storage';
+import * as Errors from './data/errors';
+import { getGamingCards } from './utils/data-provider';
+import { TEAMS } from './data/constants';
 
 firebase.initializeApp({
   apiKey: process.env.FIREBASE_API_KEY,
@@ -18,13 +21,30 @@ const DB_USERS_REF = process.env.DB_USERS_REF;
 const DB_CARDS_REF = process.env.DB_CARDS_REF;
 
 /**
- * Создание игровой сессии
+ * Инициализация игровой сессии
  * @param language
  * @param fieldSize
  * @param dictionary
  * @returns {Promise<{sessionId: string, userId: string}>}
  */
 export async function initialize({ language, fieldSize, dictionary }) {
+  const { sessionId, userId } = await createSession({
+    language,
+    fieldSize,
+    dictionary,
+  });
+  await setNewCards(sessionId, { dictionary, fieldSize });
+  return { sessionId, userId };
+}
+
+/**
+ * Создание игровой сессии
+ * @param language
+ * @param fieldSize
+ * @param dictionary
+ * @returns {Promise<{sessionId: string, userId: string}>}
+ */
+async function createSession({ language, fieldSize, dictionary }) {
   const sessionRef = database.ref(DB_SESSIONS_REF).push();
   const sessionId = sessionRef.key;
   const sessionPath = getSessionPath(sessionId);
@@ -34,6 +54,10 @@ export async function initialize({ language, fieldSize, dictionary }) {
       language,
       fieldSize,
       dictionary,
+    },
+    captains: {
+      red: '',
+      blue: '',
     },
   };
 
@@ -55,6 +79,10 @@ export async function initialize({ language, fieldSize, dictionary }) {
  * @returns {Promise<{sessionId: *, userId: string}>}
  */
 export async function joinSession(sessionId) {
+  const sessionExists = await checkSession(sessionId);
+  if (!sessionExists) {
+    throw new Error(Errors['SESSION_NOT_FOUND']);
+  }
   let user = LocalStorage.getSessionUser(sessionId);
   if (user) {
     return { sessionId, userId: user.userId };
@@ -81,11 +109,13 @@ export async function checkSession(sessionId) {
 /**
  * Установка карточек
  * @param sessionId
- * @param cards
+ * @param dictionary
+ * @param fieldSize
  * @returns {Promise<any>}
  */
-export async function setCards(sessionId, cards) {
+export async function setNewCards(sessionId, { dictionary, fieldSize }) {
   const cardsRef = getCardsRef(sessionId);
+  const cards = getGamingCards(dictionary, fieldSize);
   return cardsRef.set(cards);
 }
 
@@ -101,23 +131,26 @@ export async function updateCard(sessionId, cardId) {
 }
 
 /**
- * Обновление настроек
+ * Сохранение настроек
  * @param sessionId
  * @param language
  * @param dictionary
  * @param fieldSize
  * @returns {Promise<any>}
  */
-export async function updateSettings(
+export async function saveSettings(
   sessionId,
   { language, dictionary, fieldSize }
 ) {
-  const settingsRef = getSettingsRef(sessionId);
-  return settingsRef.update({
-    language,
-    dictionary,
-    fieldSize,
-  });
+  const settingsPath = getSettingsPath(sessionId);
+  const cardsPath = getCardsPath(sessionId);
+  const cards = getGamingCards(dictionary, fieldSize);
+
+  const updates = {
+    [settingsPath]: { language, dictionary, fieldSize },
+    [cardsPath]: cards,
+  };
+  return database.ref().update(updates);
 }
 
 /**
@@ -133,15 +166,77 @@ export function onChangeSettings(sessionId, callback) {
 }
 
 /**
- * Обновление данных юзера
+ * Сохранение данных юзера
  * @param sessionId
  * @param id
  * @param name
+ * @param team
+ * @param role
  * @returns {Promise<any>}
  */
-export async function updateUser(sessionId, { id, ...rest }) {
+export async function saveUser(sessionId, { id, name, team, role }) {
+  LocalStorage.setUsername(name);
   const userRef = getUserRef(sessionId, id);
-  return userRef.update(rest);
+  return userRef.update({ name, team, role });
+}
+
+/**
+ *
+ * @param sessionId
+ * @param userId
+ * @param team
+ * @returns {Promise<any>}
+ */
+export async function setTeamMember(sessionId, userId, team) {
+  const userRef = getUserRef(sessionId, userId);
+  await userRef.update({ team });
+  const captainsRef = getCaptainsRef(sessionId, team);
+  return captainsRef.transaction((captains) => {
+    if (captains[TEAMS['blue']] === userId) {
+      captains[TEAMS['blue']] = '';
+    }
+    if (captains[TEAMS['red']] === userId) {
+      captains[TEAMS['red']] = '';
+    }
+    return captains;
+  });
+}
+
+/**
+ * Установка юзера капитаном
+ * @param sessionId
+ * @param userId
+ * @param team
+ * @returns {Promise<any>}
+ */
+export async function setTeamCaptain(sessionId, userId, team) {
+  const captainsRef = getCaptainsRef(sessionId);
+  const userRef = getUserRef(sessionId, userId);
+  await userRef.update({ team });
+  return captainsRef.transaction((captains) => {
+    // сбрасываем капитана, если это указанный юзер
+    if (captains[TEAMS['blue']] === userId) {
+      captains[TEAMS['blue']] = '';
+    }
+    if (captains[TEAMS['red']] === userId) {
+      captains[TEAMS['red']] = '';
+    }
+    // устанавливаем юзера капитаном указанной команды
+    captains[team] = userId;
+    return captains;
+  });
+}
+
+/**
+ * listener капитанов
+ * @param sessionId
+ * @param callback
+ */
+export function onChangeCaptains(sessionId, callback) {
+  const captainsRef = getCaptainsRef(sessionId);
+  captainsRef.on('value', (snapshot) => {
+    callback(snapshot.val());
+  });
 }
 
 /**
@@ -225,4 +320,24 @@ function getCardsPath(sessionId) {
 function getCardsRef(sessionId) {
   const cardsPath = getCardsPath(sessionId);
   return database.ref(cardsPath);
+}
+
+function getCaptainsPath(sessionId) {
+  const sessionPath = getSessionPath(sessionId);
+  return `${sessionPath}/captains`;
+}
+
+function getCaptainsRef(sessionId) {
+  const captainsPath = getCaptainsPath(sessionId);
+  return database.ref(captainsPath);
+}
+
+function getCaptainPath(sessionId, team) {
+  const captainsPath = getCaptainsPath(sessionId);
+  return `${captainsPath}/${team}`;
+}
+
+function getCaptainRef(sessionId, team) {
+  const captainPath = getCaptainPath(sessionId, team);
+  return database.ref(captainPath);
 }

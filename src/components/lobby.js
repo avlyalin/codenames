@@ -1,20 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  CARDS_COLORS,
-  CARDS_DICTIONARIES,
-  FIELD_SIZES,
-} from '../data/constants';
+import { Link } from 'react-router-dom';
+import { TEAMS, CARDS_DICTIONARIES, FIELD_SIZES } from '../data/constants';
 import styles from './lobby.module.css';
 import { Team } from './team';
 
 function Lobby({
+  sessionId,
   settings,
   users,
   currentUser,
+  captains,
   onChangeSettings,
   onChangeUsername,
-  onClickPlay,
   onJoinTeam,
   onJoinTeamAsCaptain,
 }) {
@@ -60,15 +58,18 @@ function Lobby({
       );
     }
   );
-  const usersList = Object.entries(users).map(([userId, user]) => {
-    let username = user.name;
-    if (currentUser.id === userId) {
-      username += ' (вы)';
+  const usersList = users.map(({ id, name }) => {
+    if (currentUser.id === id) {
+      name += ' (вы)';
     }
-    return <li key={userId}>{username}</li>;
+    return <li key={id}>{name}</li>;
   });
   return (
-    <>
+    <div>
+      <section>
+        <h3>ID сессии:</h3>
+        {sessionId}
+      </section>
       <section>
         <h3>Размер поля:</h3>
         {fieldSizes}
@@ -98,43 +99,55 @@ function Lobby({
         <div className={styles.teams}>
           <Team
             name="Красные"
-            team={CARDS_COLORS['red']}
+            team={TEAMS['red']}
             currentUser={currentUser}
             users={users}
+            captainId={captains[TEAMS['red']]}
             onJoin={onJoinTeam}
             onJoinAsCaptain={onJoinTeamAsCaptain}
-            onLeave={onLeaveTeam}
           />
           <Team
             name="Синие"
-            team={CARDS_COLORS['blue']}
+            team={TEAMS['blue']}
             currentUser={currentUser}
             users={users}
+            captainId={captains[TEAMS['blue']]}
             onJoin={onJoinTeam}
             onJoinAsCaptain={onJoinTeamAsCaptain}
           />
         </div>
       </section>
-      <div className={styles.buttonPlay}>
-        <button onClick={onClickPlay}>Играть!</button>
-      </div>
-    </>
+      <Link to="/game">
+        <button type="button">Играть!</button>
+      </Link>
+    </div>
   );
 }
 
 Lobby.propTypes = {
+  sessionId: PropTypes.string.isRequired,
   settings: PropTypes.shape({
     language: PropTypes.string.isRequired,
     fieldSize: PropTypes.string.isRequired,
     dictionary: PropTypes.string.isRequired,
   }).isRequired,
-  users: PropTypes.object.isRequired,
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      team: PropTypes.string.isRequired,
+      role: PropTypes.string.isRequired,
+    })
+  ),
   currentUser: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
+  captains: PropTypes.shape({
+    blue: PropTypes.string.isRequired,
+    red: PropTypes.string.isRequired,
+  }).isRequired,
   onChangeUsername: PropTypes.func.isRequired,
-  onClickPlay: PropTypes.func.isRequired,
   onChangeSettings: PropTypes.func.isRequired,
   onJoinTeam: PropTypes.func.isRequired,
   onJoinTeamAsCaptain: PropTypes.func.isRequired,

@@ -19,12 +19,7 @@ export const CARDS_TYPES = {
   citizen: 'citizen',
 };
 
-export const CARDS_COLORS = {
+export const TEAMS = {
   blue: 'blue',
   red: 'red',
-};
-
-export const USERS_ROLES = {
-  captain: 'captain',
-  player: 'player',
 };

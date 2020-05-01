@@ -1,23 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CARDS_COLORS, USERS_ROLES } from '../data/constants';
+import { TEAMS } from '../data/constants';
 
 function Team({
   name,
   team,
   currentUser,
+  captainId,
   users,
   onJoin,
   onJoinAsCaptain,
 }) {
-  const teamMembers = Object.values(users).reduce((accumulator, user) => {
-    let name = user.name;
-    if (user.role === USERS_ROLES['captain']) {
-      name += ' (капитан)';
+  const teamMembers = users.reduce((accumulator, user) => {
+    if (user.team !== team) return accumulator;
+    let username = user.name;
+    if (user.id === captainId) {
+      username += ' (капитан)';
     }
-    if (user.team === team) {
-      accumulator.push({ ...user, name });
+    if (user.id === currentUser.id) {
+      username += ' (вы)';
     }
+    accumulator.push({ ...user, name: username });
     return accumulator;
   }, []);
 
@@ -43,12 +46,21 @@ function Team({
 
 Team.propTypes = {
   name: PropTypes.string.isRequired,
-  team: PropTypes.oneOf([CARDS_COLORS['blue'], CARDS_COLORS['red']]).isRequired,
+  team: PropTypes.oneOf([TEAMS['blue'], TEAMS['red']]).isRequired,
   currentUser: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    team: PropTypes.string.isRequired,
   }).isRequired,
-  users: PropTypes.object.isRequired,
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      team: PropTypes.string.isRequired,
+      role: PropTypes.string.isRequired,
+    })
+  ),
+  captainId: PropTypes.string.isRequired,
   onJoin: PropTypes.func.isRequired,
   onJoinAsCaptain: PropTypes.func.isRequired,
 };
