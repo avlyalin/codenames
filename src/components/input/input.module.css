@@ -1,0 +1,15 @@
+.input {
+  @apply w-full h-10;
+  @apply p-3 py-1;
+  @apply text-lg uppercase text-black;
+  @apply border border-solid border-gray-200 rounded-lg;
+  @apply font-sans;
+}
+
+.input:focus {
+  @apply outline-none shadow-outline-sm;
+}
+
+.input:disabled {
+  @apply bg-gray-100;
+}

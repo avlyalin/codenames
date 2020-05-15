@@ -140,7 +140,7 @@ export async function updateCard(sessionId, cardId) {
  */
 export async function saveSettings(
   sessionId,
-  { language, dictionary, fieldSize }
+  { language, dictionary, fieldSize },
 ) {
   const settingsPath = getSettingsPath(sessionId);
   const cardsPath = getCardsPath(sessionId);

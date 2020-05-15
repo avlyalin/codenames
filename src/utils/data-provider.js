@@ -8,7 +8,7 @@ import {
 
 export function getGamingCards(
   dictionaryName = CARDS_DICTIONARIES['gaga'],
-  fieldSize = FIELD_SIZES['5x5']
+  fieldSize = FIELD_SIZES['5x5'],
 ) {
   const cardsDivision = getCardsDivision(fieldSize);
   const wordsGenerator = generateDictionaryWord(dictionaryName);
@@ -55,16 +55,16 @@ export function getGamingCards(
 }
 
 export function* generateDictionaryWord(
-  dictionaryName = CARDS_DICTIONARIES['gaga']
+  dictionaryName = CARDS_DICTIONARIES['gaga'],
 ) {
-  if (!dictionaries.hasOwnProperty(dictionaryName)) {
+  if (!(dictionaryName in dictionaries)) {
     throw new TypeError('Словарь не найден');
   }
   const dictionary = dictionaries[dictionaryName];
   let wordsIndexes = {};
   for (let i = 0; i < dictionary.length; i++) {
     let wordIndex = getRandomInt(dictionary.length);
-    while (wordsIndexes.hasOwnProperty(wordIndex)) {
+    while (wordIndex in wordsIndexes) {
       wordIndex = getRandomInt(dictionary.length);
     }
     wordsIndexes[wordIndex] = null;
@@ -107,7 +107,7 @@ function shuffle(array) {
   let shuffled = [];
   array.forEach((item) => {
     let newIndex = getRandomInt(array.length);
-    while (indexes.hasOwnProperty(newIndex)) {
+    while (newIndex in indexes) {
       newIndex = getRandomInt(array.length);
     }
     shuffled[newIndex] = item;

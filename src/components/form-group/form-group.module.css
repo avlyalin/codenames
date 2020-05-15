@@ -1,0 +1,6 @@
+.form-group {
+  @apply flex flex-col;
+}
+.form-group__label {
+  @apply text-sm text-gray-400;
+}

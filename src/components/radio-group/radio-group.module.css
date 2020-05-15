@@ -1,0 +1,5 @@
+.radio-group {
+  @apply pt-3;
+  @apply flex justify-between;
+  @apply max-w-xs;
+}

@@ -6,10 +6,6 @@ function setUsername(username) {
   localStorage.setItem('username', username);
 }
 
-function getSession(sessionId) {
-  return !!localStorage.getItem(sessionId);
-}
-
 function setUserToSession(sessionId, { userId }) {
   localStorage.setItem(sessionId, JSON.stringify({ userId }));
 }

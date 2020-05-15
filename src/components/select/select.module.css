@@ -1,0 +1,59 @@
+.select {
+  @apply relative;
+  @apply text-gray-300;
+  @apply cursor-pointer;
+}
+
+.select_opened .select__button-shape {
+  transform: rotate(180deg);
+}
+
+.select__default {
+  @apply relative;
+  @apply bg-transparent;
+  @apply appearance-none;
+  @apply w-full h-10;
+  @apply pl-3 pr-10;
+  @apply text-lg text-gray-300;
+  @apply border border-solid border-gray-200 rounded-lg;
+  @apply z-10;
+}
+
+.select__default:focus {
+  @apply outline-none shadow-outline-sm;
+}
+
+.select__default > option {
+  @apply text-base;
+}
+
+.select__button {
+  @apply h-full w-10;
+  @apply absolute right-0;
+  @apply border-l-2 border-solid border-gray-200;
+  @apply inline-block;
+  @apply text-center;
+  @apply transition-colors duration-200 ease-in-out;
+}
+
+.select:hover .select__button-icon {
+  @apply text-gray-400;
+}
+
+.select__button-shape {
+  @apply inline-block;
+  @apply h-full w-5;
+}
+
+.select__button-icon {
+  @apply fill-current;
+}
+
+@keyframes rotateCaret {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}

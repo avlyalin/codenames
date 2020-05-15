@@ -1,6 +1,6 @@
 module.exports = {
-  endOfLine: "lf",
-  trailingComma: 'es5',
+  endOfLine: 'auto',
+  trailingComma: 'all',
   tabWidth: 2,
   semi: true,
   singleQuote: true,

@@ -1,0 +1,48 @@
+.button {
+  @apply inline-block align-middle;
+  @apply py-1 px-1;
+  @apply rounded;
+  @apply bg-gray-300;
+  @apply text-white text-center;
+  @apply transition-colors duration-100 ease-in-out;
+}
+
+.button:focus {
+  @apply outline-none shadow-outline-sm-gray;
+}
+
+.button:hover:not([disabled]) {
+  @apply bg-gray-400;
+}
+
+.button_block {
+  @apply block w-full;
+}
+
+.button_color_blue {
+  @apply bg-blue-100;
+}
+
+.button_color_blue:focus {
+  @apply outline-none shadow-outline-sm-blue;
+}
+
+.button_color_blue:hover:not([disabled]) {
+  @apply bg-blue-200;
+}
+
+.button_color_red {
+  @apply bg-red-100;
+}
+
+.button_color_red:hover:not([disabled]) {
+  @apply bg-red-200;
+}
+
+.button_color_red:focus {
+  @apply outline-none shadow-outline-sm-red;
+}
+
+.button:disabled {
+  @apply bg-opacity-60;
+}
