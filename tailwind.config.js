@@ -47,6 +47,9 @@ module.exports = {
       },
     },
   },
-  variants: {},
+  variants: {
+    borderWidth: ['responsive', 'first', 'last'],
+    borderRadius: ['responsive', 'first', 'last'],
+  },
   plugins: [],
 };
