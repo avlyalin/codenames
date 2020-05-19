@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 const ListGroupItem = React.forwardRef(function ListGroupItem(props, ref) {
-  const { rounded = true, classes = '', children } = props;
+  const { rounded = true, classes = '', children, ...other } = props;
   return (
     <div
       ref={ref}
@@ -15,6 +15,7 @@ const ListGroupItem = React.forwardRef(function ListGroupItem(props, ref) {
           [classes]: classes,
         },
       )}
+      {...other}
     >
       {children}
     </div>
