@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'src/components/button';
 import { TEAMS } from 'src/data/constants';
+import { Icon } from 'src/components/icon';
 
 function SelectButtons({ userTeam, onClickJoin, ...other }) {
   const isBlueTeam = userTeam === TEAMS['blue'];
@@ -24,21 +25,16 @@ function SelectButtons({ userTeam, onClickJoin, ...other }) {
         {!isBlueTeam && <FontAwesomeIcon icon={'user-plus'} size={'sm'} />}{' '}
         Синие
       </Button>
-      <span
-        className={classnames(
-          'absolute left-0 right-0 mx-auto self-center',
-          'rounded-full',
-          'h-8 w-8',
-          'bg-white',
-          'text-lg text-center',
-          {
-            'text-blue-100': isBlueTeam,
-            'text-red-100': isRedTeam,
-          },
-        )}
-      >
-        <FontAwesomeIcon icon="users" className="h-full" />
-      </span>
+
+      <Icon
+        classes={'absolute left-0 right-0 mx-auto self-center'}
+        color={classnames({
+          blue: isBlueTeam,
+          red: isRedTeam,
+        })}
+        icon="users"
+      />
+
       <Button
         color={isRedTeam ? 'red' : 'default'}
         fullWidth={true}
