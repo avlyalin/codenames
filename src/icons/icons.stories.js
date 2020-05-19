@@ -1,7 +1,7 @@
 import React from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { containerDecorator } from '../../.storybook/container';
+import { containerDecorator } from '_storybook/container';
 
 // eslint-disable-next-line import/no-default-export
 export default {
@@ -13,7 +13,14 @@ export default {
 };
 
 export const List = () => {
-  const icons = ['share-alt', 'crown', 'running', 'users', 'chevron-down'];
+  const icons = [
+    'share-alt',
+    'crown',
+    'running',
+    'users',
+    'chevron-down',
+    'user-plus',
+  ];
   const rows = icons.map((icon, index) => (
     <tr key={index}>
       <td className="border px-4 py-2 text-center">{icon}</td>

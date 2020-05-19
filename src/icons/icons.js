@@ -6,6 +6,15 @@ import {
   faRunning,
   faUsers,
   faChevronDown,
+  faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(fas, faShareAlt, faCrown, faRunning, faUsers, faChevronDown);
+library.add(
+  fas,
+  faShareAlt,
+  faCrown,
+  faRunning,
+  faUsers,
+  faChevronDown,
+  faUserPlus,
+);
