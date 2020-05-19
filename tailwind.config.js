@@ -45,6 +45,9 @@ module.exports = {
       padding: {
         '9': '2.25rem',
       },
+      borderRadius: {
+        xl: '0.75rem',
+      },
     },
   },
   variants: {
