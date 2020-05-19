@@ -14,11 +14,11 @@ exports[`<TeamSelect /> renders correctly structured component 1`] = `
       Синие
     </button>
     <span
-      class="absolute left-0 right-0 mx-auto self-center rounded-full h-8 w-8 bg-white text-lg text-center text-blue-100"
+      class="inline-flex justify-center items-center rounded-full h-8 w-8 text-blue-100 bg-white absolute left-0 right-0 mx-auto self-center"
     >
       <svg
         aria-hidden="true"
-        class="svg-inline--fa fa-users fa-w-20 h-full"
+        class="svg-inline--fa fa-users fa-w-20 "
         data-icon="users"
         data-prefix="fas"
         focusable="false"
