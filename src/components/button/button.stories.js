@@ -6,7 +6,7 @@ import { Button } from './button';
 // eslint-disable-next-line import/no-default-export
 export default {
   title: 'Button',
-  decorators: [containerDecorator, withKnobs],
+  decorators: [containerDecorator(), withKnobs],
 };
 
 export const Common = () => {

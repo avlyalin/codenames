@@ -21,10 +21,9 @@ function GameField({ cards, captains, currentUser, onOpenCard }) {
         return (
           <Card
             key={index}
-            id={index}
             card={card}
             isCaptain={isCaptain}
-            onOpen={onOpenCard}
+            onOpen={() => onOpenCard(index)}
           />
         );
       })}

@@ -7,7 +7,7 @@ import { Card } from './card';
 // eslint-disable-next-line import/no-default-export
 export default {
   title: 'Card',
-  decorators: [containerDecorator, withKnobs],
+  decorators: [containerDecorator(), withKnobs],
 };
 
 export const TeamCard = () => {

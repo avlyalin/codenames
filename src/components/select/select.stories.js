@@ -6,7 +6,7 @@ import { Select } from './select';
 // eslint-disable-next-line import/no-default-export
 export default {
   title: 'Select',
-  decorators: [containerDecorator, withKnobs],
+  decorators: [containerDecorator(), withKnobs],
 };
 
 export const common = () => {

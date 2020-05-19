@@ -6,7 +6,7 @@ import { ListGroup, ListGroupItem } from '../list-group';
 // eslint-disable-next-line import/no-default-export
 export default {
   title: 'List group',
-  decorators: [containerDecorator, withKnobs],
+  decorators: [containerDecorator(), withKnobs],
 };
 
 export const common = () => {

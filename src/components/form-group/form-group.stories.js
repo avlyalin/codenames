@@ -7,7 +7,7 @@ import { FormGroup } from './form-group';
 // eslint-disable-next-line import/no-default-export
 export default {
   title: 'Form group',
-  decorators: [containerDecorator, withKnobs],
+  decorators: [containerDecorator(), withKnobs],
 };
 
 export const WithSingleChildren = () => {
