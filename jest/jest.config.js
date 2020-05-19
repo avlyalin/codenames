@@ -1,4 +1,5 @@
 module.exports = {
+  rootDir: '../',
   moduleFileExtensions: ['js', 'json'],
   moduleNameMapper: {
     '^.+\\.module\\.css$': 'identity-obj-proxy',
@@ -8,5 +9,5 @@ module.exports = {
     '^.+\\.js$': 'babel-jest',
   },
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
-  setupFilesAfterEnv: ['<rootDir>/src/utils/setup-test.js'],
+  setupFilesAfterEnv: ['<rootDir>/jest/setup-tests.js'],
 };
