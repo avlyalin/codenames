@@ -1,14 +1,14 @@
 import { hot } from 'react-hot-loader/root';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import * as FirebaseService from '../../service';
 import {
   CARDS_DICTIONARIES,
   FIELD_SIZES,
   LANGUAGES,
   TEAMS,
-} from '../../data/constants';
-import { getGameSessionId } from '../../utils/query-params';
+} from 'src/data/constants';
+import { getGameSessionId } from 'src/utils/query-params';
+import * as FirebaseService from 'src/service';
 import { Lobby } from '../lobby';
 import { NotFound } from '../not-found';
 import { ProtectedGame } from '../game';
