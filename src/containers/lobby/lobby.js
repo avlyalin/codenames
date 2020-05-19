@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { CARDS_DICTIONARIES, FIELD_SIZES, TEAMS } from 'src/data/constants';
-import { Team } from 'src/components/team';
+import { TeamSelect } from 'src/components/team-select';
 import { WithRadioGroup as Radio } from 'src/components/radio';
 import { RadioGroup } from 'src/components/radio-group';
 import styles from './lobby.module.css';
@@ -99,21 +99,11 @@ function Lobby({
       <section>
         <h3>Команды</h3>
         <div className={styles.teams}>
-          <Team
-            name="Красные"
-            team={TEAMS['red']}
+          <TeamSelect
+            captains={captains}
             currentUser={currentUser}
             users={users}
             captainId={captains[TEAMS['red']]}
-            onJoin={onJoinTeam}
-            onJoinAsCaptain={onJoinTeamAsCaptain}
-          />
-          <Team
-            name="Синие"
-            team={TEAMS['blue']}
-            currentUser={currentUser}
-            users={users}
-            captainId={captains[TEAMS['blue']]}
             onJoin={onJoinTeam}
             onJoinAsCaptain={onJoinTeamAsCaptain}
           />

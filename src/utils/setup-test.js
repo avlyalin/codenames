@@ -1,3 +1,4 @@
+import 'src/icons/icons';
 import {
   toHaveAttribute,
   toHaveClass,
