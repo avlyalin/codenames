@@ -9,10 +9,10 @@ const ScoresBar = React.forwardRef(function ScoresBar(props, ref) {
   const iconColor = currentUser.team || '';
 
   return (
-    <div ref={ref} className={'flex flex-no-wrap items-center w-full'}>
+    <div ref={ref} className="flex flex-no-wrap items-center w-full relative">
       <ScoresLine cards={cards} position="left" team={TEAMS['blue']} />
       <Icon
-        classes="absolute left-0 right-0 mx-auto z-20"
+        classes="absolute left-0 right-0 bottom-0 transform translate-y-1/4 mx-auto z-20"
         color={iconColor}
         text="vs"
       />

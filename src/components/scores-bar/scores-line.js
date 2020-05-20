@@ -8,25 +8,30 @@ import styles from './scores-line.module.css';
 function ScoresLine({ cards, team, position }) {
   const progress = getTeamProgress(cards, team);
   const progressWidth = `${progress}%`;
+  const teamName = team === TEAMS['blue'] ? 'Синяя команда' : 'Красная команда';
+
   return (
     <div
-      className={classnames(
-        styles.container,
-        'z-10',
-        'relative',
-        'w-full h-4',
-        'rounded-lg',
-        'bg-white overflow-hidden',
-      )}
+      className={classnames('z-10 w-full', {
+        'text-right': position === 'right',
+      })}
     >
+      <span className="text-sm md:text-base text-gray-400">{teamName}</span>
       <div
-        className={classnames('h-full rounded-lg z-20 absolute ', {
-          'right-0': position === 'right',
-          'bg-blue-100': team === TEAMS['blue'],
-          'bg-red-100': team === TEAMS['red'],
-        })}
-        style={{ width: progressWidth }}
-      />
+        className={classnames(
+          styles.container,
+          'relative mt-1 h-4 rounded-lg bg-white',
+        )}
+      >
+        <div
+          className={classnames('h-full rounded-lg z-20 absolute', {
+            'right-0': position === 'right',
+            'bg-blue-100': team === TEAMS['blue'],
+            'bg-red-100': team === TEAMS['red'],
+          })}
+          style={{ width: progressWidth }}
+        />
+      </div>
     </div>
   );
 }

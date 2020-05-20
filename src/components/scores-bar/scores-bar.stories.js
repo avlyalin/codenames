@@ -13,9 +13,35 @@ export default {
     }),
     withKnobs,
   ],
+  parameters: {
+    viewport: { defaultViewport: 'ipad10p' },
+  },
 };
 
-export const Common = () => {
+export const NoOpenedCards = () => {
+  const cards = [
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: false,
+      color: TEAMS['blue'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: false,
+      color: TEAMS['blue'],
+    },
+  ];
+  const user = {
+    id: '1',
+    name: '',
+    team: select('User team', TEAMS, TEAMS['blue']),
+  };
+  return <ScoresBar cards={cards} currentUser={user} />;
+};
+
+export const WithOpenedCards = () => {
   const cards = [
     {
       type: CARDS_TYPES['agent'],
@@ -39,6 +65,148 @@ export const Common = () => {
       type: CARDS_TYPES['agent'],
       text: '',
       opened: false,
+      color: TEAMS['red'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['red'],
+    },
+  ];
+  const user = {
+    id: '1',
+    name: '',
+    team: select('User team', TEAMS, TEAMS['blue']),
+  };
+  return <ScoresBar cards={cards} currentUser={user} />;
+};
+
+export const WithAllOpenedTeamCards = () => {
+  const cards = [
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['blue'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['blue'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['blue'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: false,
+      color: TEAMS['blue'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['red'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['red'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['red'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['red'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['red'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['red'],
+    },
+  ];
+  const user = {
+    id: '1',
+    name: '',
+    team: select('User team', TEAMS, TEAMS['blue']),
+  };
+  return <ScoresBar cards={cards} currentUser={user} />;
+};
+
+export const WithAllOpenedCards = () => {
+  const cards = [
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['blue'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['blue'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['blue'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['blue'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['red'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['red'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['red'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
+      color: TEAMS['red'],
+    },
+    {
+      type: CARDS_TYPES['agent'],
+      text: '',
+      opened: true,
       color: TEAMS['red'],
     },
     {

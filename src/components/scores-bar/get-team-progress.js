@@ -1,7 +1,7 @@
 /**
  * Возвращает процент открытых карточек
- * @param cards
- * @param team
+ * @param {array} cards
+ * @param {string} team
  */
 export function getTeamProgress(cards, team) {
   let cardsCount = 0;
