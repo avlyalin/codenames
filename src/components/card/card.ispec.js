@@ -26,21 +26,21 @@ describe('<Card />', () => {
     describe('state: opened', () => {
       test('type: team', async () => {
         await page.goto(
-          'http://localhost:9010/iframe.html?path=/story/card--team-card&knob-Opened=true',
+          'http://localhost:9009/iframe.html?path=/story/card--team-card&knob-Opened=true',
         );
         const image = await page.screenshot();
         expect(image).toMatchImageSnapshot();
       });
       test('type: killer', async () => {
         await page.goto(
-          'http://localhost:9010/iframe.html?path=/story/card--killer-card&knob-Opened=true',
+          'http://localhost:9009/iframe.html?path=/story/card--killer-card&knob-Opened=true',
         );
         const image = await page.screenshot();
         expect(image).toMatchImageSnapshot();
       });
       test('type: citizen', async () => {
         await page.goto(
-          'http://localhost:9010/iframe.html?path=/story/card--citizen-card&knob-Opened=true',
+          'http://localhost:9009/iframe.html?path=/story/card--citizen-card&knob-Opened=true',
         );
         const image = await page.screenshot();
         expect(image).toMatchImageSnapshot();
