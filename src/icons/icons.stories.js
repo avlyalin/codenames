@@ -6,7 +6,7 @@ import { containerDecorator } from '_storybook/container';
 // eslint-disable-next-line import/no-default-export
 export default {
   title: 'Icons',
-  decorators: [containerDecorator, withKnobs],
+  decorators: [containerDecorator(), withKnobs],
   parameters: {
     viewport: { defaultViewport: 'ipad10p' },
   },
