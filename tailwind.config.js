@@ -27,6 +27,9 @@ module.exports = {
       },
     },
     extend: {
+      minHeight: {
+        '20': '5rem',
+      },
       height: {
         '9': '1.75rem',
       },
@@ -41,6 +44,7 @@ module.exports = {
         'outline-sm-gray': '0 0 0 2px rgba(102, 102, 102, 0.5)',
         'outline-sm-blue': '0 0 0 2px rgba(0, 153, 204, 0.5)',
         'outline-sm-red': '0 0 0 2px rgba(203, 96, 96, 0.5)',
+        'b-r': '1px 2px 3px rgba(0, 0, 0, 0.25)',
       },
       padding: {
         '9': '2.25rem',
