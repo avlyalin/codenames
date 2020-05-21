@@ -23,7 +23,7 @@ export const WithSingleAppend = () => {
   return (
     <InputGroup
       append={
-        <Button color={color} classes="w-10">
+        <Button color={color} fullWidth={false} classes="w-10">
           <FontAwesomeIcon icon="share-alt" size="lg" />
         </Button>
       }
