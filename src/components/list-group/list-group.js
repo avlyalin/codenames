@@ -6,7 +6,11 @@ const ListGroup = React.forwardRef(function ListGroup(props, ref) {
   const items = React.Children.map(children, (child) => {
     return React.cloneElement(child, { ...other });
   });
-  return <div ref={ref}>{items}</div>;
+  return (
+    <div ref={ref} className="bg-white">
+      {items}
+    </div>
+  );
 });
 
 ListGroup.propTypes = {
