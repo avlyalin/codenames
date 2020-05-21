@@ -13,7 +13,7 @@ export const common = () => {
   return (
     <>
       <Select>
-        <option>1</option>
+        <option className={'text-red-100'}>1</option>
         <option>2</option>
         <option>3</option>
       </Select>
