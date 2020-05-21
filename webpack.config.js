@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -52,6 +54,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
     }),
+    new BundleAnalyzerPlugin(),
   ],
   devtool: isDev ? 'eval-cheap-module-source-map' : false,
   devServer: {
