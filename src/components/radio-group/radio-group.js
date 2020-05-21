@@ -7,6 +7,7 @@ const RadioGroup = React.forwardRef(function RadioGroup(props, ref) {
   const { name, label, value, color, onChange, children } = props;
   return (
     <FormGroup
+      data-testid={'radio-group'}
       ref={ref}
       label={label}
       childrenContainerClass="flex justify-between pt-2 max-w-sm"

@@ -29,8 +29,8 @@ const Radio = React.forwardRef(function Radio(props, ref) {
       <span
         className={classnames({
           [styles.radioButton]: true,
-          [styles.radioButtonColorBlue]: color === 'blue',
-          [styles.radioButtonColorRed]: color === 'red',
+          [styles.radioButtonColorBlue]: checked && color === 'blue',
+          [styles.radioButtonColorRed]: checked && color === 'red',
         })}
       >
         <svg
