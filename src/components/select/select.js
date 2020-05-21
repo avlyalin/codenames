@@ -16,7 +16,6 @@ const Select = React.forwardRef(function Select(props, ref) {
     >
       <select
         className={classnames(
-          'bg-transparent',
           'appearance-none',
           'w-full h-10',
           'pl-3 pr-10',
