@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormGroup } from '../form-group';
 import { RadioGroupContext } from './radio-group-context';
-import styles from './radio-group.module.css';
 
 const RadioGroup = React.forwardRef(function RadioGroup(props, ref) {
   const { name, label, value, color, onChange, children } = props;
@@ -10,7 +9,7 @@ const RadioGroup = React.forwardRef(function RadioGroup(props, ref) {
     <FormGroup
       ref={ref}
       label={label}
-      childrenContainerClass={styles.radioGroup}
+      childrenContainerClass="flex justify-between pt-2 max-w-sm"
       role="radiogroup"
     >
       <RadioGroupContext.Provider value={{ name, value, color, onChange }}>
