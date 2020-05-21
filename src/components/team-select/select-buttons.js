@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'src/components/button';
 import { TEAMS } from 'src/data/constants';
@@ -12,11 +11,17 @@ function SelectButtons({ userTeam, onClickJoin, ...other }) {
   const handleClick = (team) => {
     if (team !== userTeam) onClickJoin(team);
   };
+  let iconColor = 'default';
+  if (isBlueTeam) {
+    iconColor = TEAMS['blue'];
+  } else if (isRedTeam) {
+    iconColor = TEAMS['red'];
+  }
 
   return (
     <div className="relative flex flex-no-wrap shadow-lg" {...other}>
       <Button
-        color={isBlueTeam ? 'blue' : 'default'}
+        color={isBlueTeam ? TEAMS['blue'] : 'default'}
         fullWidth={true}
         rounded={false}
         shadow={false}
@@ -28,15 +33,12 @@ function SelectButtons({ userTeam, onClickJoin, ...other }) {
 
       <Icon
         classes={'absolute left-0 right-0 mx-auto self-center'}
-        color={classnames({
-          blue: isBlueTeam,
-          red: isRedTeam,
-        })}
+        color={iconColor}
         icon="users"
       />
 
       <Button
-        color={isRedTeam ? 'red' : 'default'}
+        color={isRedTeam ? TEAMS['red'] : 'default'}
         fullWidth={true}
         rounded={false}
         shadow={false}
@@ -50,7 +52,7 @@ function SelectButtons({ userTeam, onClickJoin, ...other }) {
 }
 
 SelectButtons.propTypes = {
-  userTeam: PropTypes.oneOf([TEAMS['blue'], TEAMS['red'], null]),
+  userTeam: PropTypes.oneOf([TEAMS['blue'], TEAMS['red'], '']),
   onClickJoin: PropTypes.func.isRequired,
 };
 

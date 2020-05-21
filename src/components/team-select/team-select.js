@@ -10,13 +10,13 @@ const TeamSelect = React.forwardRef(function TeamSelect(
   ref,
 ) {
   let color = 'default';
-  let captainId = null;
+  let captainId = '';
   if (currentUser.team === TEAMS['blue']) {
     color = 'blue';
-    captainId = captains['blue'];
+    captainId = captains[TEAMS['blue']];
   } else if (currentUser.team === TEAMS['red']) {
     color = 'red';
-    captainId = captains['red'];
+    captainId = captains[TEAMS['red']];
   }
   const handleClick = () => {
     if (currentUser.id !== captainId) onJoinAsCaptain(currentUser.team);
