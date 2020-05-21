@@ -54,7 +54,9 @@ exports[`<TeamSelect /> renders correctly structured component 1`] = `
       Красные
     </button>
   </div>
-  <div>
+  <div
+    class="bg-white"
+  >
     <div
       class="py-2 px-6 border border-solid border-gray-200 border-t-0 first:border-t flex justify-between font-bold"
     >
