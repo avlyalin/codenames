@@ -1,5 +1,5 @@
 import React from 'react';
-import { withKnobs, boolean, radios } from '@storybook/addon-knobs';
+import { withKnobs } from '@storybook/addon-knobs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { containerDecorator } from '_storybook/container';
 import { Badge } from './badge';
@@ -10,15 +10,35 @@ export default {
   decorators: [containerDecorator(), withKnobs],
 };
 
-export const common = () => {
-  const rounded = boolean('Rounded', true);
-  const color = radios(
-    'Color',
-    { default: 'default', blue: 'blue', red: 'red' },
-    'default',
-  );
+export const AllBadges = () => {
   return (
-    <Badge color={color} rounded={rounded}>
+    <>
+      <Badge>default</Badge>
+      <Badge color={'blue'}>blue</Badge>
+      <Badge color={'red'}>red</Badge>
+    </>
+  );
+};
+
+export const Default = () => {
+  return (
+    <Badge>
+      <FontAwesomeIcon icon="crown" size={'sm'} /> Капитан
+    </Badge>
+  );
+};
+
+export const Blue = () => {
+  return (
+    <Badge color="blue">
+      <FontAwesomeIcon icon="crown" size={'sm'} /> Капитан
+    </Badge>
+  );
+};
+
+export const Red = () => {
+  return (
+    <Badge color="red">
       <FontAwesomeIcon icon="crown" size={'sm'} /> Капитан
     </Badge>
   );

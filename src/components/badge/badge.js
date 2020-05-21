@@ -3,18 +3,19 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 const Badge = React.forwardRef(function Badge(props, ref) {
-  const { rounded = true, color = 'default', children } = props;
+  const { color = 'default', children } = props;
+  const colorClasses = classnames('text-white', {
+    'bg-gray-300': color === 'default',
+    'bg-red-100': color === 'red',
+    'bg-blue-100': color === 'blue',
+  });
+
   return (
     <span
       ref={ref}
       className={classnames(
-        'inline-block px-2 py-1 leading-none text-center text-sm align-middle',
-        {
-          'rounded-xl': rounded,
-          'bg-gray-300': color === 'default',
-          'bg-red-100 text-white': color === 'red',
-          'bg-blue-100 text-white': color === 'blue',
-        },
+        'inline-block px-4 py-1 leading-none text-center text-sm align-middle rounded-xl',
+        colorClasses,
       )}
     >
       {children}
