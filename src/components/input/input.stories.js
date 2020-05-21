@@ -5,7 +5,7 @@ import { Input } from './input';
 
 // eslint-disable-next-line import/no-default-export
 export default {
-  title: 'Input',
+  title: 'Components/Input',
   decorators: [containerDecorator(), withKnobs],
 };
 

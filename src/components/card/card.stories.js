@@ -6,7 +6,7 @@ import { Card } from './card';
 
 // eslint-disable-next-line import/no-default-export
 export default {
-  title: 'Card',
+  title: 'Components/Card',
   decorators: [containerDecorator(), withKnobs],
 };
 

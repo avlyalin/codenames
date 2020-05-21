@@ -5,7 +5,7 @@ import { Radio } from './radio';
 
 // eslint-disable-next-line import/no-default-export
 export default {
-  title: 'Radio',
+  title: 'Components/Radio',
   decorators: [containerDecorator(), withKnobs],
 };
 

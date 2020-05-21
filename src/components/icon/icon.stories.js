@@ -5,7 +5,7 @@ import { Icon } from './icon';
 
 // eslint-disable-next-line import/no-default-export
 export default {
-  title: 'Icon',
+  title: 'Components/Icon',
   decorators: [containerDecorator(), withKnobs],
 };
 

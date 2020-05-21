@@ -4,6 +4,13 @@ import '../src/styles/styles.css';
 import '../src/icons/icons';
 
 addParameters({
+  options: {
+    /**
+     * display the top-level grouping as a "root" in the sidebar
+     * @type {Boolean}
+     */
+    showRoots: true,
+  },
   viewport: {
     viewports: INITIAL_VIEWPORTS,
     defaultViewport: 'iphonex',

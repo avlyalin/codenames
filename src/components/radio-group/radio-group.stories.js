@@ -6,7 +6,7 @@ import { RadioGroup } from './radio-group';
 
 // eslint-disable-next-line import/no-default-export
 export default {
-  title: 'Radio group',
+  title: 'Components/Radio group',
   decorators: [containerDecorator(), withKnobs],
 };
 

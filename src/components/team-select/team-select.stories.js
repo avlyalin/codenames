@@ -6,7 +6,7 @@ import { TeamSelect } from './team-select';
 
 // eslint-disable-next-line import/no-default-export
 export default {
-  title: 'Team select',
+  title: 'Components/Team select',
   decorators: [containerDecorator(), withKnobs],
 };
 

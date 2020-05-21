@@ -8,7 +8,7 @@ import { InputGroup } from './input-group';
 
 // eslint-disable-next-line import/no-default-export
 export default {
-  title: 'Input group',
+  title: 'Components/Input group',
   decorators: [containerDecorator(), withKnobs],
 };
 

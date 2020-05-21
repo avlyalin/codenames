@@ -5,7 +5,7 @@ import { Select } from './select';
 
 // eslint-disable-next-line import/no-default-export
 export default {
-  title: 'Select',
+  title: 'Components/Select',
   decorators: [containerDecorator(), withKnobs],
 };
 

@@ -6,7 +6,7 @@ import { Badge } from './badge';
 
 // eslint-disable-next-line import/no-default-export
 export default {
-  title: 'Badge',
+  title: 'Components/Badge',
   decorators: [containerDecorator(), withKnobs],
 };
 

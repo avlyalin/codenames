@@ -6,7 +6,7 @@ import { ScoresBar } from './scores-bar';
 
 // eslint-disable-next-line import/no-default-export
 export default {
-  title: 'Scores bar',
+  title: 'Components/Scores bar',
   decorators: [
     containerDecorator({
       styles: { backgroundColor: 'whitesmoke', height: '100vh' },
