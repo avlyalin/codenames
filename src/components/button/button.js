@@ -15,19 +15,19 @@ const Button = React.forwardRef(function Button(props, ref) {
   } = props;
   let colorClasses = classnames('bg-gray-300', {
     'hover:bg-gray-400': !disabled,
-    'focus:shadow-outline-sm-gray': shadow,
+    'focus:shadow-outline-sm-gray focus:outline-none': shadow,
   });
   let sizeClasses = 'py-2 px-2 text-base';
 
   if (color === 'blue') {
     colorClasses = classnames('bg-blue-100', {
       'hover:bg-blue-200': !disabled,
-      'focus:shadow-outline-sm-blue': shadow,
+      'focus:shadow-outline-sm-blue focus:outline-none': shadow,
     });
   } else if (color === 'red') {
     colorClasses = classnames('bg-red-100', {
       'hover:bg-red-200': !disabled,
-      'focus:shadow-outline-sm-red': shadow,
+      'focus:shadow-outline-sm-red focus:outline-none': shadow,
     });
   }
 
