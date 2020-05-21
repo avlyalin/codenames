@@ -60,7 +60,8 @@ exports[`<TeamSelect /> renders correctly structured component 1`] = `
     >
       player_1
       <span
-        class="inline-block px-2 py-1 leading-none text-center text-sm align-middle rounded-xl bg-blue-100 text-white"
+        class="inline-block px-4 py-1 leading-none text-center text-sm align-middle rounded-xl text-white bg-blue-100"
+        data-testid="badge"
       >
         <svg
           aria-hidden="true"
