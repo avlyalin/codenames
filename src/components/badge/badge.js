@@ -12,6 +12,7 @@ const Badge = React.forwardRef(function Badge(props, ref) {
 
   return (
     <span
+      data-testid={'badge'}
       ref={ref}
       className={classnames(
         'inline-block px-4 py-1 leading-none text-center text-sm align-middle rounded-xl',
