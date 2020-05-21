@@ -23,6 +23,7 @@ const Card = React.forwardRef(function Card(
 
   return (
     <div
+      data-testid={'card'}
       ref={ref}
       className={classnames(
         'flex justify-center items-center',
