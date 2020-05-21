@@ -36,6 +36,7 @@ const Button = React.forwardRef(function Button(props, ref) {
   } else if (size === 'lg') {
     sizeClasses = 'py-3 px-3 text-lg';
   }
+
   return (
     <button
       ref={ref}
@@ -49,7 +50,7 @@ const Button = React.forwardRef(function Button(props, ref) {
         {
           'w-full': fullWidth,
           [classes]: classes,
-          rounded: rounded,
+          'rounded-lg': rounded,
           'bg-opacity-60': disabled,
         },
       )}
