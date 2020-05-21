@@ -22,7 +22,7 @@ class App extends Component {
       settings: {
         language: LANGUAGES['ru'],
         fieldSize: FIELD_SIZES['5x5'],
-        dictionary: CARDS_DICTIONARIES['gaga'],
+        dictionary: CARDS_DICTIONARIES['GAGA'],
       },
       users: [],
       cards: [],

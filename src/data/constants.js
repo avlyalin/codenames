@@ -9,7 +9,7 @@ export const FIELD_SIZES = {
 };
 
 export const CARDS_DICTIONARIES = {
-  gaga: 'gaga',
+  GAGA: 'gaga',
 };
 
 export const CARDS_TYPES = {

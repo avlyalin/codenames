@@ -7,7 +7,7 @@ import {
 } from '../data/constants';
 
 export function getGamingCards(
-  dictionaryName = CARDS_DICTIONARIES['gaga'],
+  dictionaryName = CARDS_DICTIONARIES['GAGA'],
   fieldSize = FIELD_SIZES['5x5'],
 ) {
   const cardsDivision = getCardsDivision(fieldSize);
@@ -55,7 +55,7 @@ export function getGamingCards(
 }
 
 export function* generateDictionaryWord(
-  dictionaryName = CARDS_DICTIONARIES['gaga'],
+  dictionaryName = CARDS_DICTIONARIES['GAGA'],
 ) {
   if (!(dictionaryName in dictionaries)) {
     throw new TypeError('Словарь не найден');
