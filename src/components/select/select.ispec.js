@@ -8,7 +8,7 @@ const customConfig = {
 describe('<Select /> visually looks correct', () => {
   test('closed', async () => {
     await page.goto(
-      'http://localhost:9010/iframe.html?path=/story/components-select--common',
+      'http://localhost:9009/iframe.html?path=/story/components-select--common',
     );
     const image = await page.screenshot();
     expect(image).toMatchImageSnapshot(customConfig);
@@ -16,7 +16,7 @@ describe('<Select /> visually looks correct', () => {
 
   test('opened', async () => {
     await page.goto(
-      'http://localhost:9010/iframe.html?path=/story/components-select--common',
+      'http://localhost:9009/iframe.html?path=/story/components-select--common',
     );
     await page.click('select');
     const image = await page.screenshot();
