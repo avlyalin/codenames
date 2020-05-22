@@ -55,67 +55,80 @@ function Lobby({
 
   return (
     <div className={classnames('p-5 pt-4 min-h-screen', bgColor)}>
-      <h1 className={'text-center text-xl uppercase tracking-wider'}>
+      <h1
+        className={
+          'text-center text-xl uppercase tracking-wider row-start-1 col-start-1'
+        }
+      >
         Codenames
       </h1>
-      <div className={'mt-4'}>
-        <FormGroup label={'ID сессии'}>
-          <InputGroup
-            append={
-              <Button classes="w-10" color={color} fullWidth={false}>
-                <FontAwesomeIcon icon="share-alt" size="lg" />
-              </Button>
-            }
+      <div
+        className={classnames(
+          'max-w-screen-xl mx-auto',
+          'md:grid grid-flow-col grid-cols-1 grid-rows-5 md:grid-cols-2 col-gap-12 lg:col-gap-20',
+        )}
+      >
+        <div className={'mt-8 row-start-1 col-start-1'}>
+          <FormGroup label={'ID сессии'}>
+            <InputGroup
+              append={
+                <Button classes="w-10" color={color} fullWidth={false}>
+                  <FontAwesomeIcon icon="share-alt" size="lg" />
+                </Button>
+              }
+            >
+              <Input defaultValue={sessionId} disabled />
+            </InputGroup>
+          </FormGroup>
+        </div>
+
+        <div className={'mt-8 row-start-2 col-start-1'}>
+          <RadioGroup
+            color={color}
+            label="Размер поля"
+            value={settings.fieldSize}
+            name="field-size"
+            onChange={onChangeFieldSize}
           >
-            <Input defaultValue={sessionId} disabled />
-          </InputGroup>
-        </FormGroup>
-      </div>
+            {fieldSizes}
+          </RadioGroup>
+        </div>
 
-      <div className={'mt-8'}>
-        <RadioGroup
-          color={color}
-          label="Размер поля"
-          value={settings.fieldSize}
-          name="field-size"
-          onChange={onChangeFieldSize}
-        >
-          {fieldSizes}
-        </RadioGroup>
-      </div>
+        <div className={'mt-8 row-start-3 col-start-1'}>
+          <FormGroup label={'Словарь'}>
+            <Select onChange={onChangeDictionary}>{dictionaries}</Select>
+          </FormGroup>
+        </div>
 
-      <div className={'mt-8'}>
-        <FormGroup label={'Словарь'}>
-          <Select onChange={onChangeDictionary}>{dictionaries}</Select>
-        </FormGroup>
-      </div>
+        <div className={'mt-8 row-start-4 col-start-1'}>
+          <FormGroup label={'Ваш ник'} labelFor={'username'}>
+            <Input
+              id={'username'}
+              value={currentUser.name}
+              onChange={(e) => onChangeUsername(e.target.value)}
+            />
+          </FormGroup>
+        </div>
 
-      <div className={'mt-8'}>
-        <FormGroup label={'Ваш ник'} labelFor={'username'}>
-          <Input
-            id={'username'}
-            value={currentUser.name}
-            onChange={(e) => onChangeUsername(e.target.value)}
-          />
-        </FormGroup>
-      </div>
+        <div className={'mt-8 row-start-1 row-span-6 col-start-2'}>
+          <FormGroup label="&nbsp;" labelFor={'username'}>
+            <TeamSelect
+              captains={captains}
+              currentUser={currentUser}
+              users={users}
+              onJoin={onJoinTeam}
+              onJoinAsCaptain={onJoinTeamAsCaptain}
+            />
+          </FormGroup>
+        </div>
 
-      <div className={'mt-8'}>
-        <TeamSelect
-          captains={captains}
-          currentUser={currentUser}
-          users={users}
-          onJoin={onJoinTeam}
-          onJoinAsCaptain={onJoinTeamAsCaptain}
-        />
-      </div>
-
-      <div className={'mt-8'}>
-        <Link to="/game">
-          <Button color={color}>
-            <FontAwesomeIcon icon="running" size="lg" /> Погнали
-          </Button>
-        </Link>
+        <div className={'mt-8 row-start-5 col-start-1'}>
+          <Link to="/game">
+            <Button color={color}>
+              <FontAwesomeIcon icon="running" size="lg" /> Погнали
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
