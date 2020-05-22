@@ -34,7 +34,6 @@ class App extends Component {
         id: '',
         name: '',
         team: '',
-        role: '',
       },
     };
     this.sessionId = '';

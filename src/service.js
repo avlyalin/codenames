@@ -173,13 +173,12 @@ export function onChangeSettings(sessionId, callback) {
  * @param id
  * @param name
  * @param team
- * @param role
  * @returns {Promise<any>}
  */
-export async function saveUser(sessionId, { id, name, team, role }) {
+export async function saveUser(sessionId, { id, name, team }) {
   LocalStorage.setUsername(name);
   const userRef = getUserRef(sessionId, id);
-  return userRef.update({ name, team, role });
+  return userRef.update({ name, team });
 }
 
 /**
