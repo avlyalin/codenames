@@ -1,10 +1,11 @@
-import dictionaries from '../data/dictionaries';
+import { getRandomInt } from 'src/utils/math';
+import dictionaries from 'src/data/dictionaries';
 import {
   TEAMS,
   CARDS_DICTIONARIES,
   CARDS_TYPES,
   FIELD_SIZES,
-} from '../data/constants';
+} from 'src/data/constants';
 
 export function getGamingCards(
   dictionaryName = CARDS_DICTIONARIES['GAGA'],
@@ -96,10 +97,6 @@ function getCardsDivision(fieldSize = FIELD_SIZES['5x5']) {
       citizenCards: 7,
     };
   }
-}
-
-function getRandomInt(maxNumber) {
-  return Math.floor(Math.random() * maxNumber);
 }
 
 function shuffle(array) {
