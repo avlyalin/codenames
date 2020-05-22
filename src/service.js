@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/database';
+import { getRandomTeam } from 'src/utils/user';
 import * as LocalStorage from './utils/local-storage';
 import * as Errors from './data/errors';
 import { getGamingCards } from './utils/data-provider';
@@ -70,6 +71,7 @@ async function createSession({ language, fieldSize, dictionary }) {
     [userPath]: newUser,
   };
   await database.ref().update(updates);
+  LocalStorage.setUserToSession(sessionId, { userId, team: newUser.team });
   return { sessionId, userId };
 }
 
@@ -91,7 +93,7 @@ export async function joinSession(sessionId) {
   const userId = pushUser(sessionId);
   const userPath = getUserPath(sessionId, userId);
   await database.ref(userPath).set(user);
-  LocalStorage.setUserToSession(sessionId, { userId });
+  LocalStorage.setUserToSession(sessionId, { userId, team: user.team });
   return { sessionId, userId };
 }
 
@@ -271,7 +273,7 @@ function getUser() {
   const username = LocalStorage.getUsername() || 'Неизвестный';
   return {
     name: username,
-    team: '',
+    team: getRandomTeam(),
     role: '',
   };
 }
