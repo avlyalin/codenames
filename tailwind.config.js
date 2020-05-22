@@ -27,6 +27,9 @@ module.exports = {
       },
     },
     extend: {
+      screens: {
+        '2xl': '1920',
+      },
       minHeight: {
         '20': '5rem',
       },

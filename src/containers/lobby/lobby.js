@@ -47,10 +47,10 @@ function Lobby({
   let bgColor = '';
   if (currentUser.team === TEAMS['blue']) {
     color = TEAMS['blue'];
-    bgColor = 'background-blue';
+    bgColor = 'bg-blue-linear md:bg-blue-linear-image';
   } else if (currentUser.team === TEAMS['red']) {
     color = TEAMS['red'];
-    bgColor = 'background-red';
+    bgColor = 'bg-red-linear md:bg-red-linear-image';
   }
 
   return (
