@@ -3,7 +3,7 @@ const {
 } = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  purge: ['./src/**/*.jsx', './assets/index.html'],
+  purge: ['./src/**/*.js', './assets/index.html'],
   theme: {
     colors: {
       transparent,
