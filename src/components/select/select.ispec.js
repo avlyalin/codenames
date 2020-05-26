@@ -10,7 +10,8 @@ describe('<Select /> visually looks correct', () => {
     await page.goto(
       'http://localhost:9009/iframe.html?path=/story/components-select--common',
     );
-    const image = await page.screenshot();
+    const select = await page.$('[data-testid=select-component]');
+    const image = await select.screenshot();
     expect(image).toMatchImageSnapshot(customConfig);
   });
 
