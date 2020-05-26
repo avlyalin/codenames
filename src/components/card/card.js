@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { CARDS_TYPES, TEAMS } from 'src/data/constants';
+import styles from './card.module.css';
 
 const Card = React.forwardRef(function Card(
   { card, isCaptain, onOpen, ...other },
@@ -10,7 +11,7 @@ const Card = React.forwardRef(function Card(
   const { text, type, color, opened } = card;
   const disclosed = opened || isCaptain;
 
-  let colorClasses = '';
+  let colorClasses = 'bg-white';
   if (color === TEAMS['blue']) {
     colorClasses = 'bg-blue-100 text-white';
   } else if (color === TEAMS['red']) {
@@ -26,13 +27,15 @@ const Card = React.forwardRef(function Card(
       data-testid={'card'}
       ref={ref}
       className={classnames(
-        'flex justify-center items-center',
-        'border-2 border-solid border-gray-200 rounded-lg',
-        'min-h-20',
-        'py-2 px-1',
-        'text-xl uppercase font-bold',
-        'shadow-b-r',
-        disclosed ? colorClasses : 'text-gray-500',
+        styles.card,
+        'inline-flex justify-center items-center',
+        'border border-solid border-gray-200 rounded-lg',
+        'cursor-pointer',
+        'min-h-10 max-h-30',
+        'uppercase font-bold truncate',
+        'hover:shadow-b-r',
+        'shadow-md',
+        disclosed ? colorClasses : 'bg-white text-gray-500',
       )}
       onClick={onOpen}
       {...other}
