@@ -17,7 +17,15 @@ const Button = React.forwardRef(function Button(props, ref) {
     'hover:bg-gray-400': !disabled,
     'focus:shadow-outline-sm-gray focus:outline-none': shadow,
   });
-  let sizeClasses = 'py-2 px-2 text-base';
+
+  let sizeClasses = '';
+  if (size === 'sm') {
+    sizeClasses = 'btn-sm';
+  } else if (size === 'md') {
+    sizeClasses = 'btn-md';
+  } else {
+    sizeClasses = 'btn-lg';
+  }
 
   if (color === 'blue') {
     colorClasses = classnames('bg-blue-100', {
@@ -31,16 +39,11 @@ const Button = React.forwardRef(function Button(props, ref) {
     });
   }
 
-  if (size === 'sm') {
-    sizeClasses = 'py-1 px-1 text-sm';
-  } else if (size === 'lg') {
-    sizeClasses = 'py-3 px-3 text-lg';
-  }
-
   return (
     <button
       ref={ref}
       className={classnames(
+        classes,
         'align-middle',
         'text-white text-center',
         'outline-none',
@@ -49,7 +52,6 @@ const Button = React.forwardRef(function Button(props, ref) {
         sizeClasses,
         {
           'w-full': fullWidth,
-          [classes]: classes,
           'rounded-lg': rounded,
           'bg-opacity-60': disabled,
         },

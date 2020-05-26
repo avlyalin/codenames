@@ -40,4 +40,17 @@
             background-size: auto, auto;
         }
     }
+
+    .btn-sm {
+        @apply py-1 px-1 text-sm;
+    }
+    .btn-md {
+        padding-top: 9px;
+        padding-bottom: 9px;
+        @apply px-2 text-base;
+    }
+    .btn-lg {
+        @apply py-3 px-3 text-lg;
+    }
 }
+
