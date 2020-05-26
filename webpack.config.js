@@ -63,6 +63,7 @@ module.exports = {
   plugins: plugins,
   devtool: isDev ? 'eval-cheap-module-source-map' : false,
   devServer: {
+    host: '0.0.0.0',
     port: 9000,
     compress: true,
     contentBase: path.join(__dirname, 'assets'),
