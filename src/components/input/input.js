@@ -8,8 +8,8 @@ const Input = React.forwardRef(function Input(props, ref) {
     <input
       ref={ref}
       className={classnames(
-        'w-full h-10',
-        'p-3 py-1',
+        'w-full',
+        'p-3 py-2',
         'text-base text-black',
         'border border-solid border-gray-200 rounded-lg',
         'focus:outline-none focus:shadow-outline-sm',
