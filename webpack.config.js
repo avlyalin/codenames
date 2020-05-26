@@ -8,6 +8,18 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 
 const isDev = process.env.NODE_ENV !== 'production';
+const isAnalysis = process.env.NODE_ENV === 'analysis';
+
+const plugins = [
+  new Dotenv(),
+  new HtmlWebpackPlugin({ template: './assets/index.html' }),
+  new MiniCssExtractPlugin({
+    filename: '[name].[hash].css',
+  }),
+];
+if (isAnalysis) {
+  plugins.push(new BundleAnalyzerPlugin());
+}
 
 module.exports = {
   entry: './src/index.js',
@@ -48,14 +60,7 @@ module.exports = {
       _storybook: path.resolve(__dirname, './.storybook'),
     },
   },
-  plugins: [
-    new Dotenv(),
-    new HtmlWebpackPlugin({ template: './assets/index.html' }),
-    new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-    }),
-    new BundleAnalyzerPlugin(),
-  ],
+  plugins: plugins,
   devtool: isDev ? 'eval-cheap-module-source-map' : false,
   devServer: {
     port: 9000,

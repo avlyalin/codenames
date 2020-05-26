@@ -17,7 +17,7 @@
     "eslint:staged": "eslint --fix",
     "eslint:list": "eslint src/ ./.storybook",
     "eslint:fix": "eslint src/ ./.storybook --fix",
-    "analyzer": "webpack --profile --json > bundle-stats.json"
+    "analyzer": "cross-env NODE_ENV=analysis webpack --profile --json > bundle-stats.json"
   },
   "keywords": [
     "codenames",
