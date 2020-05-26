@@ -35,6 +35,7 @@ const Card = React.forwardRef(function Card(
         'uppercase font-bold truncate',
         'hover:shadow-b-r',
         'shadow-md',
+        'select-none',
         disclosed ? colorClasses : 'bg-white text-gray-500',
       )}
       onClick={onOpen}
