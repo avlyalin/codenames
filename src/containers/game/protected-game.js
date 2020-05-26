@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import { getGameSessionId } from 'src/utils/query-params';
 import * as Errors from '../../data/errors';
-import { getGameSessionId } from '../../utils/query-params';
-import { TEAMS } from '../../data/constants';
-import { Game } from './index';
+import { Game } from './game';
 
-function ProtectedGame({ sessionId, connected, ...rest }) {
+function ProtectedGame({ sessionId, connected, ...other }) {
   const querySessionId = getGameSessionId(window.location.href);
 
   if (!connected && !querySessionId) {
@@ -23,30 +22,12 @@ function ProtectedGame({ sessionId, connected, ...rest }) {
       </div>
     );
   }
-  return <Game {...rest} />;
+  return <Game {...other} />;
 }
 
 ProtectedGame.propTypes = {
   connected: PropTypes.bool.isRequired,
   sessionId: PropTypes.string.isRequired,
-  captains: PropTypes.shape({
-    blue: PropTypes.string.isRequired,
-    red: PropTypes.string.isRequired,
-  }).isRequired,
-  currentUser: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    team: PropTypes.string.isRequired,
-  }).isRequired,
-  cards: PropTypes.arrayOf(
-    PropTypes.shape({
-      type: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-      opened: PropTypes.bool.isRequired,
-      color: PropTypes.oneOf([TEAMS['blue'], TEAMS['red']]),
-    }),
-  ).isRequired,
-  onOpenCard: PropTypes.func.isRequired,
 };
 
 export { ProtectedGame };

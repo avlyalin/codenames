@@ -1,0 +1,10 @@
+<svg width="216" height="216" viewBox="0 0 216 216" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M61 1H155C158.866 1 162 4.13401 162 8V193H54V8C54 4.13401 57.134 1 61 1Z" fill="white" stroke="#EEEEEE" stroke-width="2"/>
+    <path d="M54 192H162V207C162 210.866 158.866 214 155 214H61C57.134 214 54 210.866 54 207V192Z" fill="white" stroke="#EEEEEE" stroke-width="2"/>
+    <rect x="97.1964" y="6" width="20.625" height="3" rx="1.5" fill="#C4C4C4"/>
+    <path d="M111.357 203C111.357 204.942 109.814 206.5 107.929 206.5C106.043 206.5 104.5 204.942 104.5 203C104.5 201.058 106.043 199.5 107.929 199.5C109.814 199.5 111.357 201.058 111.357 203Z" fill="#CCCCCC" stroke="#CCCCCC"/>
+    <path d="M1 155L1 61C1 57.134 4.13401 54 8 54L193 54V162H8C4.13401 162 1 158.866 1 155Z" fill="white" stroke="#666666" stroke-width="2"/>
+    <path d="M192 162V54H207C210.866 54 214 57.134 214 61V155C214 158.866 210.866 162 207 162H192Z" fill="white" stroke="#666666" stroke-width="2"/>
+    <rect x="6" y="118.804" width="20.625" height="3" rx="1.5" transform="rotate(-90 6 118.804)" fill="#666666"/>
+    <ellipse cx="203" cy="108.071" rx="3.92857" ry="4" transform="rotate(-90 203 108.071)" fill="#666666"/>
+</svg>

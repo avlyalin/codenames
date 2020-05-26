@@ -1,32 +1,62 @@
 import React from 'react';
-import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TEAMS } from 'src/data/constants';
-import { Card } from '../card';
-import styles from './game-field.module.css';
+import { ScoresBar } from 'src/components/scores-bar';
+import { Button } from 'src/components/button';
+import { Cards } from './cards';
 
-function GameField({ cards, captains, currentUser, onOpenCard }) {
-  const isCaptain =
-    Object.values(captains).find(
-      (captainId) => captainId === currentUser.id,
-    ) !== undefined;
-  const classNames = classnames({
-    [styles.container]: true,
-    [styles.containerRows4]: false,
-    [styles.containerRows5]: true,
-  });
+function GameField(props) {
+  const { currentUser, cards, captains, onOpenCard } = props;
+
+  let color = 'default';
+  let bgColor = '';
+  if (currentUser.team === TEAMS['blue']) {
+    color = TEAMS['blue'];
+    bgColor = 'bg-blue-linear-image';
+  } else if (currentUser.team === TEAMS['red']) {
+    color = TEAMS['red'];
+    bgColor = 'bg-red-linear-image';
+  }
+
   return (
-    <div className={classNames}>
-      {cards.map((card, index) => {
-        return (
-          <Card
-            key={index}
-            card={card}
-            isCaptain={isCaptain}
-            onOpen={() => onOpenCard(index)}
-          />
-        );
-      })}
+    <div
+      className={classnames(
+        bgColor,
+        'p-2 md:px-6',
+        'h-screen w-screen sm:h-screen sm:w-screen',
+      )}
+    >
+      <div className={'h-1/10 md:h-15/100 flex justify-center items-center'}>
+        <ScoresBar currentUser={props.currentUser} cards={props.cards} />
+      </div>
+      <div
+        className={
+          'h-8/10 md:h-7/10 pt-4 pb-2 flex justify-center items-center'
+        }
+      >
+        <Cards
+          cards={cards}
+          captains={captains}
+          currentUser={currentUser}
+          onOpenCard={onOpenCard}
+        />
+      </div>
+      <div
+        className={classnames(
+          'h-1/10 md:h-15/100',
+          'max-w-1/4 md:max-w-1/2 lg:max-w-1/2 mx-auto',
+          'flex items-center',
+        )}
+      >
+        <Link className="w-full" to="/">
+          <Button classes={'sm:btn-sm md:btn-md lg:btn-lg'} color={color}>
+            <FontAwesomeIcon icon="sign-out-alt" /> Покинуть игру
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }

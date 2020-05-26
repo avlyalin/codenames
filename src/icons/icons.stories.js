@@ -20,6 +20,7 @@ export const List = () => {
     'users',
     'chevron-down',
     'user-plus',
+    'sign-out-alt',
   ];
   const rows = icons.map((icon, index) => (
     <tr key={index}>

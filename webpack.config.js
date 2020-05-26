@@ -51,11 +51,20 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'svg-inline-loader',
+          },
+        ],
+      },
     ],
   },
   resolve: {
     alias: {
       'react-dom': '@hot-loader/react-dom',
+      assets: path.resolve(__dirname, './assets'),
       src: path.resolve(__dirname, './src'),
       _storybook: path.resolve(__dirname, './.storybook'),
     },
