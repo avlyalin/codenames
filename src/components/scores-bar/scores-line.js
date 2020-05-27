@@ -2,10 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { TEAMS } from 'src/data/constants';
-import { getTeamProgress } from './get-team-progress';
+import { Icon } from 'src/components/icon';
+import {
+  getRemainingCardsCount,
+  getTeamProgress,
+} from 'src/utils/team-progress';
 import styles from './scores-line.module.css';
 
 function ScoresLine({ cards, team, position }) {
+  const remainingCards = getRemainingCardsCount(cards, team);
   const progress = getTeamProgress(cards, team);
   const progressWidth = `${progress}%`;
   const teamName = team === TEAMS['blue'] ? 'Синяя команда' : 'Красная команда';
@@ -20,16 +25,28 @@ function ScoresLine({ cards, team, position }) {
       <div
         className={classnames(
           styles.container,
-          'relative mt-1 h-4 rounded-lg bg-white',
+          'relative mt-1 md:mt-2 lg:mt-3 rounded-lg h-4 bg-white flex',
         )}
       >
         <div
           className={classnames('h-full rounded-lg z-20 absolute', {
+            'left-0': position === 'left',
             'right-0': position === 'right',
             'bg-blue-100': team === TEAMS['blue'],
             'bg-red-100': team === TEAMS['red'],
           })}
           style={{ width: progressWidth }}
+        />
+        <Icon
+          classes={classnames(
+            'absolute bottom-0 transform translate-y-1/4 mx-auto z-20',
+            {
+              'left-0': position === 'left',
+              'right-0': position === 'right',
+            },
+          )}
+          color={team}
+          text={`${remainingCards}`}
         />
       </div>
     </div>

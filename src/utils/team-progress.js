@@ -1,4 +1,14 @@
 /**
+ * Возвращает оставшееся количество карточке
+ * @param cards
+ * @param team
+ * @return {*}
+ */
+export function getRemainingCardsCount(cards, team) {
+  return cards.filter((card) => card.color === team && !card.opened).length;
+}
+
+/**
  * Возвращает процент открытых карточек
  * @param {array} cards
  * @param {string} team
