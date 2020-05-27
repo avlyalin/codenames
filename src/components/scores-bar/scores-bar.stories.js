@@ -1,7 +1,13 @@
 import React from 'react';
 import { select, withKnobs } from '@storybook/addon-knobs';
 import { containerDecorator } from '_storybook/container';
-import { CARDS_TYPES, TEAMS } from 'src/data/constants';
+import { TEAMS } from 'src/data/constants';
+import {
+  all_opened_cards_5x5,
+  all_opened_red_cards_5x5,
+  no_opened_cards_5x5,
+  with_opened_cards_5x5,
+} from 'src/data/fixtures';
 import { ScoresBar } from './scores-bar';
 
 // eslint-disable-next-line import/no-default-export
@@ -19,207 +25,37 @@ export default {
 };
 
 export const NoOpenedCards = () => {
-  const cards = [
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: false,
-      color: TEAMS['blue'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: false,
-      color: TEAMS['blue'],
-    },
-  ];
   const user = {
     id: '1',
     name: '',
     team: select('User team', TEAMS, TEAMS['blue']),
   };
-  return <ScoresBar cards={cards} currentUser={user} />;
+  return <ScoresBar cards={no_opened_cards_5x5} currentUser={user} />;
 };
 
 export const WithOpenedCards = () => {
-  const cards = [
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['blue'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['blue'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: false,
-      color: TEAMS['blue'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: false,
-      color: TEAMS['red'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['red'],
-    },
-  ];
   const user = {
     id: '1',
     name: '',
     team: select('User team', TEAMS, TEAMS['blue']),
   };
-  return <ScoresBar cards={cards} currentUser={user} />;
+  return <ScoresBar cards={with_opened_cards_5x5} currentUser={user} />;
 };
 
 export const WithAllOpenedTeamCards = () => {
-  const cards = [
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['blue'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['blue'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['blue'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: false,
-      color: TEAMS['blue'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['red'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['red'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['red'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['red'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['red'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['red'],
-    },
-  ];
   const user = {
     id: '1',
     name: '',
     team: select('User team', TEAMS, TEAMS['blue']),
   };
-  return <ScoresBar cards={cards} currentUser={user} />;
+  return <ScoresBar cards={all_opened_red_cards_5x5} currentUser={user} />;
 };
 
 export const WithAllOpenedCards = () => {
-  const cards = [
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['blue'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['blue'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['blue'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['blue'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['red'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['red'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['red'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['red'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['red'],
-    },
-    {
-      type: CARDS_TYPES['agent'],
-      text: '',
-      opened: true,
-      color: TEAMS['red'],
-    },
-  ];
   const user = {
     id: '1',
     name: '',
     team: select('User team', TEAMS, TEAMS['blue']),
   };
-  return <ScoresBar cards={cards} currentUser={user} />;
+  return <ScoresBar cards={all_opened_cards_5x5} currentUser={user} />;
 };

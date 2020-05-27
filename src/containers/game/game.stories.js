@@ -1,9 +1,10 @@
 import React from 'react';
-import { withKnobs, text, radios } from '@storybook/addon-knobs';
+import { withKnobs, radios } from '@storybook/addon-knobs';
 import { BrowserRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { containerDecorator } from '_storybook/container';
-import { CARDS_TYPES, TEAMS } from 'src/data/constants';
+import { TEAMS } from 'src/data/constants';
+import { with_opened_cards_5x5 } from 'src/data/fixtures';
 import { Game } from './game';
 
 // eslint-disable-next-line import/no-default-export
@@ -33,20 +34,11 @@ export const Common = () => {
     team: color,
   };
 
-  const word = text('Word', 'БИБЛИОТЕКА');
-  const count = radios('Size', { '5x4': '20', '5x5': '25', '5x6': '30' }, '25');
-  const cards = [...new Array(parseInt(count))].map(() => ({
-    type: CARDS_TYPES['agent'],
-    text: word,
-    opened: false,
-    color: TEAMS['blue'],
-  }));
-
   return (
     <BrowserRouter>
       <Route>
         <Game
-          cards={cards}
+          cards={with_opened_cards_5x5}
           captains={captains}
           currentUser={user}
           onOpenCard={() => {}}
