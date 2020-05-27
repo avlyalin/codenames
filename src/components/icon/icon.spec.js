@@ -19,4 +19,10 @@ describe('<Icon />', () => {
     const { container } = render(<Icon color="blue" icon="crown" />);
     expect(container.firstChild).toMatchSnapshot();
   });
+  test('should have filled blue classes', () => {
+    const { container } = render(
+      <Icon color="blue" icon="crown" filled={true} />,
+    );
+    expect(container.firstChild).toMatchSnapshot();
+  });
 });

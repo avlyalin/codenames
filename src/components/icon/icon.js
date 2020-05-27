@@ -4,7 +4,13 @@ import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Icon = React.forwardRef(function Icon(props, ref) {
-  const { classes = '', color = 'default', icon, text = '' } = props;
+  const {
+    classes = '',
+    color = 'default',
+    filled = false,
+    icon,
+    text = '',
+  } = props;
   const content = icon ? (
     <FontAwesomeIcon icon={icon} />
   ) : (
@@ -13,9 +19,17 @@ const Icon = React.forwardRef(function Icon(props, ref) {
 
   let colorClasses = 'text-black bg-gray-200';
   if (color === 'blue') {
-    colorClasses = 'text-blue-100 bg-white';
+    if (filled) {
+      colorClasses = 'bg-blue-100 text-white';
+    } else {
+      colorClasses = 'text-blue-100 bg-white';
+    }
   } else if (color === 'red') {
-    colorClasses = 'text-red-100 bg-white';
+    if (filled) {
+      colorClasses = 'bg-red-100 text-white';
+    } else {
+      colorClasses = 'text-red-100 bg-white';
+    }
   }
 
   return (
@@ -39,6 +53,7 @@ Icon.propTypes = {
   color: PropTypes.oneOf(['default', 'blue', 'red']),
   icon: PropTypes.string,
   text: PropTypes.string,
+  filled: PropTypes.bool,
 };
 
 export { Icon };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withKnobs, text, radios } from '@storybook/addon-knobs';
+import { withKnobs, text, radios, boolean } from '@storybook/addon-knobs';
 import { containerDecorator } from '_storybook/container';
 import { Icon } from './icon';
 
@@ -10,6 +10,7 @@ export default {
 };
 
 export const WithIcon = () => {
+  const filled = boolean('Filled', false);
   const icon = text('Icon name', 'user-plus');
   const textContent = text('Text content', '');
   const color = radios(
@@ -17,10 +18,11 @@ export const WithIcon = () => {
     { default: 'default', blue: 'blue', red: 'red' },
     'default',
   );
-  return <Icon color={color} icon={icon} text={textContent} />;
+  return <Icon color={color} icon={icon} text={textContent} filled={filled} />;
 };
 
 export const WithText = () => {
+  const filled = boolean('Filled', false);
   const icon = text('Icon name', '');
   const textContent = text('Text content', 'vs');
   const color = radios(
@@ -28,5 +30,5 @@ export const WithText = () => {
     { default: 'default', blue: 'blue', red: 'red' },
     'default',
   );
-  return <Icon color={color} icon={icon} text={textContent} />;
+  return <Icon color={color} icon={icon} text={textContent} filled={filled} />;
 };
