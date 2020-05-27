@@ -36,7 +36,7 @@ export const no_opened_cards_5x5 = [
   },
   {
     color: 'red',
-    opened: true,
+    opened: false,
     text: 'НьюЙорк',
     type: 'agent',
   },
