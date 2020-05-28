@@ -4,8 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const isDev = process.env.NODE_ENV !== 'production';
 const isAnalysis = process.env.NODE_ENV === 'analysis';
@@ -16,6 +16,14 @@ const plugins = [
   new MiniCssExtractPlugin({
     filename: '[name].[hash].css',
   }),
+  new CopyPlugin({
+    patterns: [
+      {
+        from: path.resolve(__dirname, 'assets/favicons'),
+        to: path.resolve(__dirname, 'public/favicons'),
+      },
+    ],
+  }),
 ];
 if (isAnalysis) {
   plugins.push(new BundleAnalyzerPlugin());
@@ -24,7 +32,7 @@ if (isAnalysis) {
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public'),
     filename: 'app.[hash].js',
   },
   optimization: {
