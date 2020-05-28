@@ -60,6 +60,7 @@ async function createSession({ language, fieldSize, dictionary }) {
       red: '',
       blue: '',
     },
+    winner_team: '',
   };
 
   const userId = pushUser(sessionId);
@@ -109,6 +110,17 @@ export async function checkSession(sessionId) {
 }
 
 /**
+ * Запись команды победителей
+ * @param sessionId
+ * @param winnerTeam
+ * @return {Promise<any>}
+ */
+export function setWinnerTeam(sessionId, winnerTeam) {
+  const winnerTeamRef = getWinnerTeamRef(sessionId);
+  return winnerTeamRef.update({ winner_team: winnerTeam });
+}
+
+/**
  * Установка карточек
  * @param sessionId
  * @param dictionary
@@ -145,10 +157,12 @@ export async function saveSettings(
   { language, dictionary, fieldSize },
 ) {
   const settingsPath = getSettingsPath(sessionId);
+  const winnerTeamPath = getWinnerTeamPath(sessionId);
   const cardsPath = getCardsPath(sessionId);
   const cards = getGamingCards(dictionary, fieldSize);
 
   const updates = {
+    [winnerTeamPath]: '',
     [settingsPath]: { language, dictionary, fieldSize },
     [cardsPath]: cards,
   };
@@ -264,6 +278,18 @@ export function onChangeCards(sessionId, callback) {
   });
 }
 
+/**
+ * listener победителей
+ * @param sessionId
+ * @param callback
+ */
+export function onChangeWinnerTeam(sessionId, callback) {
+  const winnerTeamRef = getWinnerTeamRef(sessionId);
+  winnerTeamRef.on('value', (snapshot) => {
+    callback(snapshot.val());
+  });
+}
+
 function pushUser(sessionId) {
   return getUsersRef(sessionId).push().key;
 }
@@ -333,12 +359,12 @@ function getCaptainsRef(sessionId) {
   return database.ref(captainsPath);
 }
 
-function getCaptainPath(sessionId, team) {
-  const captainsPath = getCaptainsPath(sessionId);
-  return `${captainsPath}/${team}`;
+function getWinnerTeamPath(sessionId) {
+  const winnerPath = getSessionPath(sessionId);
+  return `${winnerPath}/winner_team`;
 }
 
-function getCaptainRef(sessionId, team) {
-  const captainPath = getCaptainPath(sessionId, team);
-  return database.ref(captainPath);
+function getWinnerTeamRef(sessionId) {
+  const winnerPath = getWinnerTeamPath(sessionId);
+  return database.ref(winnerPath);
 }

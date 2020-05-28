@@ -23,7 +23,7 @@ function Cards({ cards, captains, currentUser, onOpenCard }) {
             key={index}
             card={card}
             isCaptain={isCaptain}
-            onOpen={() => onOpenCard(index)}
+            onOpen={() => onOpenCard({ id: index, card })}
           />
         );
       })}

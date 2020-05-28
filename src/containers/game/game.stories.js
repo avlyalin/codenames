@@ -20,9 +20,14 @@ export default {
 
 export const Common = () => {
   const color = radios(
-    'Color',
+    'User team',
     { default: 'default', blue: 'blue', red: 'red' },
     'blue',
+  );
+  const winnerTeam = radios(
+    'Winner team',
+    { 'no winner': '', blue: 'blue', red: 'red' },
+    '',
   );
   const captains = {
     [TEAMS['blue']]: '1',
@@ -41,6 +46,7 @@ export const Common = () => {
           cards={with_opened_cards_5x5}
           captains={captains}
           currentUser={user}
+          winnerTeam={winnerTeam}
           onOpenCard={() => {}}
         />
       </Route>

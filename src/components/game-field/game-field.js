@@ -6,10 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TEAMS } from 'src/data/constants';
 import { ScoresBar } from 'src/components/scores-bar';
 import { Button } from 'src/components/button';
+import { Winners } from 'src/components/winners';
 import { Cards } from './cards';
 
 function GameField(props) {
-  const { currentUser, cards, captains, onOpenCard } = props;
+  const { currentUser, cards, captains, winnerTeam, onOpenCard } = props;
 
   let color = 'default';
   let bgColor = '';
@@ -21,6 +22,13 @@ function GameField(props) {
     bgColor = 'bg-red-linear-image';
   }
 
+  let topbarComponent =
+    winnerTeam in TEAMS ? (
+      <Winners team={winnerTeam} />
+    ) : (
+      <ScoresBar currentUser={props.currentUser} cards={props.cards} />
+    );
+
   return (
     <div
       className={classnames(
@@ -30,7 +38,7 @@ function GameField(props) {
       )}
     >
       <div className={'h-1/10 md:h-15/100 flex justify-center items-center'}>
-        <ScoresBar currentUser={props.currentUser} cards={props.cards} />
+        {topbarComponent}
       </div>
       <div
         className={
@@ -79,6 +87,7 @@ GameField.propTypes = {
       color: PropTypes.oneOf([TEAMS['blue'], TEAMS['red']]),
     }),
   ).isRequired,
+  winnerTeam: PropTypes.string.isRequired,
   onOpenCard: PropTypes.func.isRequired,
 };
 

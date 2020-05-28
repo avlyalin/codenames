@@ -3,12 +3,14 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import {
   CARDS_DICTIONARIES,
+  CARDS_TYPES,
   FIELD_SIZES,
   LANGUAGES,
   TEAMS,
 } from 'src/data/constants';
 import { getGameSessionId } from 'src/utils/query-params';
 import * as FirebaseService from 'src/service';
+import { getRemainingCardsCount } from 'src/utils/team-progress';
 import { Lobby } from '../lobby';
 import { NotFound } from '../not-found';
 import { ProtectedGame } from '../game';
@@ -85,6 +87,9 @@ class App extends Component {
     FirebaseService.onChangeCaptains(this.sessionId, (captains) => {
       this.setState({ captains: { ...this.state.captains, ...captains } });
     });
+    FirebaseService.onChangeWinnerTeam(this.sessionId, (winnerTeam) => {
+      this.setState({ winnerTeam: winnerTeam.winner_team });
+    });
   }
 
   onChangeUsers(newUsers) {
@@ -107,8 +112,28 @@ class App extends Component {
     });
   }
 
-  saveCard(cardId) {
-    FirebaseService.updateCard(this.sessionId, cardId);
+  saveCard({ id, card: { type, color } }) {
+    if (!this.state.winnerTeam) {
+      let winnerTeam = '';
+
+      if (type === CARDS_TYPES['agent']) {
+        const remainingCards = getRemainingCardsCount(this.state.cards, color);
+        if (remainingCards === 1) {
+          winnerTeam = color;
+        }
+      } else if (type === CARDS_TYPES['killer']) {
+        winnerTeam =
+          this.state.currentUser.team === TEAMS['blue']
+            ? TEAMS['red']
+            : TEAMS['blue'];
+      }
+
+      FirebaseService.updateCard(this.sessionId, id).then(() => {
+        FirebaseService.setWinnerTeam(this.sessionId, winnerTeam);
+      });
+    } else {
+      FirebaseService.updateCard(this.sessionId, id);
+    }
   }
 
   saveUsername(name) {
