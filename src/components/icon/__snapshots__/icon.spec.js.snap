@@ -22,7 +22,7 @@ exports[`<Icon /> icon prop has higher priority than text 1`] = `
 </span>
 `;
 
-exports[`<Icon /> should filled blue classes 1`] = `
+exports[`<Icon /> should have filled blue classes 1`] = `
 <span
   class="inline-flex justify-center items-center rounded-full h-8 w-8 bg-blue-100 text-white"
 >
