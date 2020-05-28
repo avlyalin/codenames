@@ -7,6 +7,7 @@ import {
   faChevronDown,
   faUserPlus,
   faSignOutAlt,
+  faTrophy,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -17,4 +18,5 @@ library.add(
   faChevronDown,
   faUserPlus,
   faSignOutAlt,
+  faTrophy,
 );

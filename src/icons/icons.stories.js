@@ -21,6 +21,7 @@ export const List = () => {
     'chevron-down',
     'user-plus',
     'sign-out-alt',
+    'trophy',
   ];
   const rows = icons.map((icon, index) => (
     <tr key={index}>
