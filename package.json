@@ -11,7 +11,7 @@
     "jest:integration": "jest --config ./jest/jest.config.integration.js",
     "test:integration": "start-server-and-test storybook:test http-get://localhost:9009 jest:integration",
     "test:all": "run-p test test:integration",
-    "storybook:test": "start-storybook --ci -p 9009",
+    "storybook:test": "start-storybook --ci -p 9009 --quiet",
     "storybook": "start-storybook -p 9010",
     "prettier:staged": "prettier --write",
     "eslint:staged": "eslint --fix",

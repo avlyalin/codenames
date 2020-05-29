@@ -11,7 +11,7 @@ const isDev = process.env.NODE_ENV !== 'production';
 const isAnalysis = process.env.NODE_ENV === 'analysis';
 
 const plugins = [
-  new Dotenv(),
+  new Dotenv({ systemvars: true }),
   new HtmlWebpackPlugin({ template: './assets/index.html' }),
   new MiniCssExtractPlugin({
     filename: '[name].[hash].css',
