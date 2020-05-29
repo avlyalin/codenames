@@ -1,8 +1,0 @@
-.container:after {
-    content: '';
-    @apply w-full h-full;
-    @apply box-border;
-    @apply absolute top-0 left-0;
-    @apply z-10;
-    @apply border border-solid border-gray-200 rounded-lg;
-}

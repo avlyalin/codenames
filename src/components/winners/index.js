@@ -1,1 +1,0 @@
-export { Winners } from './winners';
