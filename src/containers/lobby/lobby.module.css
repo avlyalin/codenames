@@ -27,6 +27,7 @@
     @screen lg {
         .header {
             background-size: 320px;
+            @apply h-13;
         }
     }
     @screen xl {
