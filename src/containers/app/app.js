@@ -37,6 +37,7 @@ class App extends Component {
         name: '',
         team: '',
       },
+      winnerTeam: '',
     };
     this.sessionId = '';
   }
@@ -88,7 +89,7 @@ class App extends Component {
       this.setState({ captains: { ...this.state.captains, ...captains } });
     });
     FirebaseService.onChangeWinnerTeam(this.sessionId, (winnerTeam) => {
-      this.setState({ winnerTeam: winnerTeam.winner_team });
+      this.setState({ winnerTeam });
     });
   }
 
@@ -183,6 +184,7 @@ class App extends Component {
               captains={this.state.captains}
               currentUser={this.state.currentUser}
               cards={this.state.cards}
+              winnerTeam={this.state.winnerTeam}
               onOpenCard={this.saveCard.bind(this)}
             />
           </Route>

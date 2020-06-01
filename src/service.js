@@ -60,7 +60,7 @@ async function createSession({ language, fieldSize, dictionary }) {
       red: '',
       blue: '',
     },
-    winner_team: '',
+    winnerTeam: '',
   };
 
   const userId = pushUser(sessionId);
@@ -117,7 +117,7 @@ export async function checkSession(sessionId) {
  */
 export function setWinnerTeam(sessionId, winnerTeam) {
   const winnerTeamRef = getWinnerTeamRef(sessionId);
-  return winnerTeamRef.update({ winner_team: winnerTeam });
+  return winnerTeamRef.set(winnerTeam);
 }
 
 /**
@@ -361,7 +361,7 @@ function getCaptainsRef(sessionId) {
 
 function getWinnerTeamPath(sessionId) {
   const winnerPath = getSessionPath(sessionId);
-  return `${winnerPath}/winner_team`;
+  return `${winnerPath}/winnerTeam`;
 }
 
 function getWinnerTeamRef(sessionId) {
