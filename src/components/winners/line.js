@@ -7,7 +7,7 @@ const Line = ({ content, position }) => {
   return (
     <div
       className={classnames(
-        'h-9 md:h-11 lg:h-13 xl:h-15',
+        'h-7 md:h-11 lg:h-13 xl:h-15',
         'py-4 md:py-5 lg:py-6',
         'flex items-center flex-grow w-20',
         'relative',
