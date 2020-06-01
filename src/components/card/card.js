@@ -11,6 +11,12 @@ const Card = React.forwardRef(function Card(
   const { text, type, color, opened } = card;
   const disclosed = opened || isCaptain;
 
+  const handleClick = () => {
+    if (!isCaptain) {
+      onOpen();
+    }
+  };
+
   let colorClasses = 'bg-white';
   if (color === TEAMS['blue']) {
     colorClasses = 'bg-blue-100 text-white';
@@ -30,15 +36,18 @@ const Card = React.forwardRef(function Card(
         styles.card,
         'inline-flex justify-center items-center',
         'border border-solid border-gray-200 rounded-lg',
-        'cursor-pointer',
         'min-h-10 max-h-30',
         'uppercase font-bold truncate',
-        'hover:shadow-b-r',
         'shadow-md',
         'select-none',
         disclosed ? colorClasses : 'bg-white text-gray-500',
+        {
+          'hover:shadow-b-r': !isCaptain,
+          'cursor-pointer': !isCaptain,
+          'opacity-25': opened && isCaptain,
+        },
       )}
-      onClick={onOpen}
+      onClick={handleClick}
       {...other}
     >
       {text}
