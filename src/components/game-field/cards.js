@@ -14,7 +14,7 @@ function Cards({ cards, captains, currentUser, onOpenCard }) {
     <div
       className={classnames(
         'h-full w-full',
-        'grid grid-cols-5 gap-2 md:gap-3 lg:gap-5 grid-rows-auto',
+        'grid grid-cols-5 gap-2 md:gap-3 lg:gap-6 grid-rows-auto',
       )}
     >
       {cards.map((card, index) => {
