@@ -12,6 +12,7 @@ import { Input } from 'src/components/input';
 import { Button } from 'src/components/button';
 import { FormGroup } from 'src/components/form-group';
 import { Select } from 'src/components/select';
+import styles from './lobby.module.css';
 
 function Lobby({
   sessionId,
@@ -54,21 +55,19 @@ function Lobby({
   }
 
   return (
-    <div className={classnames('p-5 pt-4 min-h-screen', bgColor)}>
-      <h1
-        className={
-          'text-center text-xl uppercase tracking-wider row-start-1 col-start-1'
-        }
-      >
-        Codenames
-      </h1>
+    <div className={classnames('p-5 pt-4 md:pt-6 min-h-screen', bgColor)}>
+      <div
+        role="img"
+        className={classnames(styles.header)}
+        aria-label={'Codenames'}
+      />
       <div
         className={classnames(
           'max-w-screen-xl mx-auto',
           'md:grid grid-flow-col grid-cols-1 grid-rows-5 md:grid-cols-2 col-gap-12 lg:col-gap-20',
         )}
       >
-        <div className={'mt-8 row-start-1 col-start-1'}>
+        <div className={'mt-6 row-start-1 col-start-1'}>
           <FormGroup label={'ID сессии'}>
             <InputGroup
               append={
@@ -110,7 +109,7 @@ function Lobby({
           </FormGroup>
         </div>
 
-        <div className={'mt-8 row-start-1 row-span-6 col-start-2'}>
+        <div className={'mt-8 md:mt-6 row-start-1 row-span-6 col-start-2'}>
           <FormGroup label="&nbsp;" labelFor={'username'}>
             <TeamSelect
               captains={captains}
