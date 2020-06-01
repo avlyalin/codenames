@@ -1,0 +1,53 @@
+@import "animate.css/source/flippers/flip.css";
+
+.letter {
+    margin-left: 0.35rem;
+}
+
+@responsive {
+    @screen xs {
+        .letter {
+            margin-left: 0.29rem;
+        }
+    }
+    @screen sm {
+        .letter {
+            margin-left: 0.35rem;
+        }
+    }
+}
+
+.letter_animation_flip {
+    animation: flip;
+    animation-duration: 1.5s;
+}
+
+.letter_animation_hinge {
+    transform-origin: top right;
+    animation: fall;
+    animation-duration: 1.5s;
+}
+
+@keyframes fall {
+    0% {
+        animation-timing-function: ease-in-out;
+    }
+
+    20%,
+    60% {
+        transform: rotate3d(0, 0, 1, -40deg);
+        animation-timing-function: ease-in-out;
+    }
+
+    40%,
+    80% {
+        transform: rotate3d(0, 0, 1, -25deg);
+        animation-timing-function: ease-in-out;
+        opacity: 1;
+    }
+
+    to {
+        transform: translate3d(0, 300px, 0);
+        opacity: 0;
+    }
+}

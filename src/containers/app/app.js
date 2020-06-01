@@ -11,6 +11,7 @@ import {
 import { getGameSessionId } from 'src/utils/query-params';
 import * as FirebaseService from 'src/service';
 import { getRemainingCardsCount } from 'src/utils/team-progress';
+import { Loader } from 'src/components/loader';
 import { Lobby } from '../lobby';
 import { NotFound } from '../not-found';
 import { ProtectedGame } from '../game';
@@ -38,6 +39,8 @@ class App extends Component {
         team: '',
       },
       winnerTeam: '',
+      isLoading: true,
+      loadingText: 'Запуск приложения',
     };
     this.sessionId = '';
   }
@@ -68,10 +71,15 @@ class App extends Component {
       ));
     }
     this.sessionId = sessionId;
-    this.setState({
-      connected: true,
-      currentUser: { ...this.state.currentUser, id: userId },
-    });
+    this.setState(
+      {
+        connected: true,
+        currentUser: { ...this.state.currentUser, id: userId },
+      },
+      () => {
+        this.setState({ isLoading: false });
+      },
+    );
   }
 
   addListeners() {
@@ -162,35 +170,43 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Lobby
-              sessionId={this.sessionId}
-              settings={this.state.settings}
-              users={this.state.users}
-              captains={this.state.captains}
-              currentUser={this.state.currentUser}
-              onChangeSettings={this.saveSettings.bind(this)}
-              onChangeUsername={this.saveUsername.bind(this)}
-              onJoinTeam={this.joinTeam.bind(this)}
-              onJoinTeamAsCaptain={this.joinTeamAsCaptain.bind(this)}
-            />
-          </Route>
-          <Route path="/game">
-            <ProtectedGame
-              connected={this.state.connected}
-              sessionId={this.sessionId}
-              captains={this.state.captains}
-              currentUser={this.state.currentUser}
-              cards={this.state.cards}
-              winnerTeam={this.state.winnerTeam}
-              onOpenCard={this.saveCard.bind(this)}
-            />
-          </Route>
-          <Route component={NotFound} />
-        </Switch>
-      </Router>
+      <>
+        {this.state.isLoading && (
+          <Loader
+            isLoading={this.state.isLoading}
+            text={this.state.loadingText}
+          />
+        )}
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Lobby
+                sessionId={this.sessionId}
+                settings={this.state.settings}
+                users={this.state.users}
+                captains={this.state.captains}
+                currentUser={this.state.currentUser}
+                onChangeSettings={this.saveSettings.bind(this)}
+                onChangeUsername={this.saveUsername.bind(this)}
+                onJoinTeam={this.joinTeam.bind(this)}
+                onJoinTeamAsCaptain={this.joinTeamAsCaptain.bind(this)}
+              />
+            </Route>
+            <Route path="/game">
+              <ProtectedGame
+                connected={this.state.connected}
+                sessionId={this.sessionId}
+                captains={this.state.captains}
+                currentUser={this.state.currentUser}
+                cards={this.state.cards}
+                winnerTeam={this.state.winnerTeam}
+                onOpenCard={this.saveCard.bind(this)}
+              />
+            </Route>
+            <Route component={NotFound} />
+          </Switch>
+        </Router>
+      </>
     );
   }
 }
