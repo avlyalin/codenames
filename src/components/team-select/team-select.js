@@ -18,7 +18,11 @@ const TeamSelect = React.forwardRef(function TeamSelect(
     color = 'red';
     captainId = captains[TEAMS['red']];
   }
-  const handleClick = () => {
+
+  const handleClickJoin = (team) => {
+    if (team !== currentUser.team || currentUser.id === captainId) onJoin(team);
+  };
+  const handleClickJoinAsCaptain = () => {
     if (currentUser.id !== captainId) onJoinAsCaptain(currentUser.team);
   };
 
@@ -28,7 +32,10 @@ const TeamSelect = React.forwardRef(function TeamSelect(
       className="w-full border-t border-b border-solid border-gray-200 rounded-lg overflow-hidden"
       {...other}
     >
-      <SelectButtons userTeam={currentUser.team} onClickJoin={onJoin} />
+      <SelectButtons
+        userTeam={currentUser.team}
+        onClickJoin={handleClickJoin}
+      />
       <PlayersList
         captainId={captainId}
         currentUser={currentUser}
@@ -40,7 +47,7 @@ const TeamSelect = React.forwardRef(function TeamSelect(
         size={'md'}
         fullWidth={true}
         shadow={false}
-        onClick={handleClick}
+        onClick={handleClickJoinAsCaptain}
       >
         Стать капитаном
       </Button>

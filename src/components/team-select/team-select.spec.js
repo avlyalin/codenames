@@ -80,14 +80,25 @@ describe('<TeamSelect />', () => {
       expect(onJoin).toHaveBeenCalledTimes(1);
       expect(onJoin).toHaveBeenCalledWith(TEAMS['red']);
     });
-    test('should not fire event on click join current team', () => {
+    test('should not fire event on click join current team if has player role', () => {
       const onJoin = jest.fn();
+      captains['blue'] = '100';
       const { getByText } = setup({ onJoin });
 
       const joinButton = getByText('Синие');
       fireEvent.click(joinButton);
 
       expect(onJoin).not.toHaveBeenCalled();
+    });
+    test('should fire event on click join current team if has captain role', () => {
+      const onJoin = jest.fn();
+      const { getByText } = setup({ onJoin });
+
+      const joinButton = getByText('Синие');
+      fireEvent.click(joinButton);
+
+      expect(onJoin).toHaveBeenCalledTimes(1);
+      expect(onJoin).toHaveBeenCalledWith(TEAMS['blue']);
     });
   });
 

@@ -8,9 +8,7 @@ import { Icon } from 'src/components/icon';
 function SelectButtons({ userTeam, onClickJoin, ...other }) {
   const isBlueTeam = userTeam === TEAMS['blue'];
   const isRedTeam = userTeam === TEAMS['red'];
-  const handleClick = (team) => {
-    if (team !== userTeam) onClickJoin(team);
-  };
+
   let iconColor = 'default';
   if (isBlueTeam) {
     iconColor = TEAMS['blue'];
@@ -25,7 +23,7 @@ function SelectButtons({ userTeam, onClickJoin, ...other }) {
         fullWidth={true}
         rounded={false}
         shadow={false}
-        onClick={() => handleClick(TEAMS['blue'])}
+        onClick={() => onClickJoin(TEAMS['blue'])}
       >
         {!isBlueTeam && <FontAwesomeIcon icon={'user-plus'} size={'sm'} />}{' '}
         Синие
@@ -42,7 +40,7 @@ function SelectButtons({ userTeam, onClickJoin, ...other }) {
         fullWidth={true}
         rounded={false}
         shadow={false}
-        onClick={() => handleClick(TEAMS['red'])}
+        onClick={() => onClickJoin(TEAMS['red'])}
       >
         {!isRedTeam && <FontAwesomeIcon icon={'user-plus'} size={'sm'} />}{' '}
         Красные
