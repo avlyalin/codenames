@@ -7,9 +7,9 @@ export function useMedia(mediaQuery) {
 
   useEffect(() => {
     const handleMediaChange = () => setMatches(mql.matches);
-    mql.addEventListener('change', handleMediaChange);
+    mql.addListener(handleMediaChange);
     return () => {
-      mql.removeEventListener('change', handleMediaChange);
+      mql.removeListener(handleMediaChange);
     };
   }, []);
 
