@@ -55,7 +55,12 @@ function Lobby({
   }
 
   return (
-    <div className={classnames('p-5 pt-4 md:pt-6 min-h-screen', bgColor)}>
+    <div
+      className={classnames(
+        'p-5 pt-4 md:pt-6 lg:pt-8 xl:pt-10 min-h-screen',
+        bgColor,
+      )}
+    >
       <div
         role="img"
         className={classnames(styles.header)}
