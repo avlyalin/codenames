@@ -12,7 +12,7 @@ const Card = React.forwardRef(function Card(
   const disclosed = opened || isCaptain;
 
   const handleClick = () => {
-    if (!isCaptain) {
+    if (!isCaptain && !opened) {
       onOpen();
     }
   };

@@ -1,3 +1,5 @@
+import { CARDS_TYPES, TEAMS } from 'src/data/constants';
+
 export const no_opened_cards_5x5 = [
   { opened: false, text: 'проводник', type: 'citizen' },
   {
@@ -561,3 +563,37 @@ export const all_opened_cards_5x5 = [
     type: 'agent',
   },
 ];
+
+export function getBlueAgentCard(opened = false) {
+  return {
+    color: TEAMS['blue'],
+    opened: opened,
+    text: 'предприниматель',
+    type: CARDS_TYPES['agent'],
+  };
+}
+
+export function getRedAgentCard(opened = false) {
+  return {
+    color: TEAMS['red'],
+    opened: opened,
+    text: 'предприниматель',
+    type: CARDS_TYPES['agent'],
+  };
+}
+
+export function getCitizenCard(opened = false) {
+  return {
+    opened: opened,
+    text: 'предприниматель',
+    type: CARDS_TYPES['citizen'],
+  };
+}
+
+export function getKillerCard(opened = false) {
+  return {
+    opened: opened,
+    text: 'предприниматель',
+    type: CARDS_TYPES['killer'],
+  };
+}
