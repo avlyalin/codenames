@@ -30,13 +30,7 @@ function GameField(props) {
     );
 
   return (
-    <div
-      className={classnames(
-        bgColor,
-        'p-2 md:px-6',
-        'h-screen w-screen sm:h-screen sm:w-screen',
-      )}
-    >
+    <div className={classnames(bgColor, 'p-2 md:px-6', 'h-screen w-screen')}>
       <div className={'h-1/10 md:h-15/100 flex justify-center items-center'}>
         {topbarComponent}
       </div>
