@@ -56,6 +56,7 @@ function Lobby({
   }
 
   const shareIcon = navigator.share ? 'share-alt' : 'clone';
+  const shareDescription = navigator.share ? 'Поделиться' : 'Копировать ссылку';
 
   return (
     <div
@@ -76,7 +77,11 @@ function Lobby({
         )}
       >
         <div className={'mt-6 row-start-1 col-start-1'}>
-          <FormGroup label={'ID сессии'}>
+          <FormGroup
+            description={shareDescription}
+            descriptionPosition={'end'}
+            label={'ID сессии'}
+          >
             <InputGroup
               append={
                 <Button
