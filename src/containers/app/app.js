@@ -173,7 +173,6 @@ class App extends Component {
     if (navigator.share) {
       navigator.share({
         title: 'Codenames - кодовые имена',
-        text: 'Присоединиться к игре',
         url: getGameLink(this.sessionId),
       });
     } else {
