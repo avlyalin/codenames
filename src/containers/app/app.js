@@ -1,6 +1,7 @@
 import { hot } from 'react-hot-loader/root';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import copy from 'copy-to-clipboard';
 import {
   CARDS_DICTIONARIES,
   CARDS_TYPES,
@@ -8,7 +9,7 @@ import {
   LANGUAGES,
   TEAMS,
 } from 'src/data/constants';
-import { getGameSessionId } from 'src/utils/query-params';
+import { getGameLink, getGameSessionId } from 'src/utils/query-params';
 import * as FirebaseService from 'src/service';
 import { getRemainingCardsCount } from 'src/utils/team-progress';
 import { Loader } from 'src/components/loader';
@@ -168,6 +169,18 @@ class App extends Component {
     );
   }
 
+  shareSession() {
+    if (navigator.share) {
+      navigator.share({
+        title: 'Codenames - кодовые имена',
+        text: 'Присоединиться к игре',
+        url: getGameLink(this.sessionId),
+      });
+    } else {
+      copy(getGameLink(this.sessionId));
+    }
+  }
+
   render() {
     return (
       <>
@@ -190,6 +203,7 @@ class App extends Component {
                 onChangeUsername={this.saveUsername.bind(this)}
                 onJoinTeam={this.joinTeam.bind(this)}
                 onJoinTeamAsCaptain={this.joinTeamAsCaptain.bind(this)}
+                onClickShare={this.shareSession.bind(this)}
               />
             </Route>
             <Route path="/game">

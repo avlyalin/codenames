@@ -8,6 +8,7 @@ import {
   faUserPlus,
   faSignOutAlt,
   faTrophy,
+  faClone,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -19,4 +20,5 @@ library.add(
   faUserPlus,
   faSignOutAlt,
   faTrophy,
+  faClone,
 );

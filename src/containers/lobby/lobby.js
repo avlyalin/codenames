@@ -24,6 +24,7 @@ function Lobby({
   onChangeUsername,
   onJoinTeam,
   onJoinTeamAsCaptain,
+  onClickShare,
 }) {
   const onChangeFieldSize = (e) => {
     onChangeSettings({ ...settings, fieldSize: e.target.value });
@@ -54,6 +55,8 @@ function Lobby({
     bgColor = 'bg-red-linear md:bg-red-linear-image';
   }
 
+  const shareIcon = navigator.share ? 'share-alt' : 'clone';
+
   return (
     <div
       className={classnames(
@@ -76,8 +79,13 @@ function Lobby({
           <FormGroup label={'ID сессии'}>
             <InputGroup
               append={
-                <Button classes="w-10" color={color} fullWidth={false}>
-                  <FontAwesomeIcon icon="share-alt" size="lg" />
+                <Button
+                  classes="w-10"
+                  color={color}
+                  fullWidth={false}
+                  onClick={onClickShare}
+                >
+                  <FontAwesomeIcon icon={shareIcon} size="lg" />
                 </Button>
               }
             >
@@ -165,6 +173,7 @@ Lobby.propTypes = {
   onChangeSettings: PropTypes.func.isRequired,
   onJoinTeam: PropTypes.func.isRequired,
   onJoinTeamAsCaptain: PropTypes.func.isRequired,
+  onClickShare: PropTypes.func.isRequired,
 };
 
 export { Lobby };
