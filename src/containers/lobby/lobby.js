@@ -25,6 +25,7 @@ function Lobby({
   onJoinTeam,
   onJoinTeamAsCaptain,
   onClickShare,
+  onClickGenerateCards,
 }) {
   const onChangeFieldSize = (e) => {
     onChangeSettings({ ...settings, fieldSize: e.target.value });
@@ -140,6 +141,12 @@ function Lobby({
         </div>
 
         <div className={'mt-8 row-start-5 col-start-1'}>
+          <Button color={color} onClick={onClickGenerateCards}>
+            <FontAwesomeIcon icon="retweet" size="lg" /> Сгенерировать карточки
+          </Button>
+        </div>
+
+        <div className={'mt-8 md:mt-0 row-start-6 col-start-1'}>
           <Link to="/game">
             <Button color={color}>
               <FontAwesomeIcon icon="running" size="lg" /> Погнали
@@ -179,6 +186,7 @@ Lobby.propTypes = {
   onJoinTeam: PropTypes.func.isRequired,
   onJoinTeamAsCaptain: PropTypes.func.isRequired,
   onClickShare: PropTypes.func.isRequired,
+  onClickGenerateCards: PropTypes.func.isRequired,
 };
 
 export { Lobby };

@@ -181,6 +181,10 @@ class App extends Component {
     }
   }
 
+  generateCards() {
+    FirebaseService.saveSettings(this.sessionId, this.state.settings);
+  }
+
   render() {
     return (
       <>
@@ -204,6 +208,7 @@ class App extends Component {
                 onJoinTeam={this.joinTeam.bind(this)}
                 onJoinTeamAsCaptain={this.joinTeamAsCaptain.bind(this)}
                 onClickShare={this.shareSession.bind(this)}
+                onClickGenerateCards={this.generateCards.bind(this)}
               />
             </Route>
             <Route path="/game">

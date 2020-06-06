@@ -9,6 +9,7 @@ import {
   faSignOutAlt,
   faTrophy,
   faClone,
+  faRetweet,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -21,4 +22,5 @@ library.add(
   faSignOutAlt,
   faTrophy,
   faClone,
+  faRetweet,
 );

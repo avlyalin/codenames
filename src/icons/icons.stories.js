@@ -23,6 +23,7 @@ export const List = () => {
     'sign-out-alt',
     'trophy',
     'clone',
+    'retweet',
   ];
   const rows = icons.map((icon, index) => (
     <tr key={index}>
