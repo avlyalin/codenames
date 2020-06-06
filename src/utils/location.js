@@ -4,8 +4,8 @@ export function getGameSessionId(url) {
   return searchParams.get('gameId');
 }
 
-export function getGameLink(sessionId) {
-  return `${window.location.href}?gameId=${sessionId}`;
+export function getGameLink() {
+  return window.location.href;
 }
 
 export function setGameSessionId(sessionId) {
