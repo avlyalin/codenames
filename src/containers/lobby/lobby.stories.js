@@ -65,6 +65,8 @@ export const Common = () => {
           onChangeSettings={() => {}}
           onChangeUsername={() => {}}
           onJoinTeamAsCaptain={() => {}}
+          onClickShare={() => {}}
+          onClickGenerateCards={() => {}}
         />
       </Route>
     </BrowserRouter>
