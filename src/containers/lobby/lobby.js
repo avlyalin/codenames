@@ -62,7 +62,7 @@ function Lobby({
   return (
     <div
       className={classnames(
-        'p-5 pt-4 md:pt-6 lg:pt-8 xl:pt-10 min-h-screen',
+        'p-5 md:pt-6 lg:pt-7 xl:pt-8 min-h-screen',
         bgColor,
       )}
     >
@@ -77,7 +77,7 @@ function Lobby({
           'md:grid grid-flow-col grid-cols-1 grid-rows-5 md:grid-cols-2 col-gap-12 lg:col-gap-20',
         )}
       >
-        <div className={'mt-6 row-start-1 col-start-1'}>
+        <div className={'mt-8 row-start-1 col-start-1'}>
           <FormGroup
             description={shareDescription}
             descriptionPosition={'end'}
@@ -128,8 +128,8 @@ function Lobby({
           </FormGroup>
         </div>
 
-        <div className={'mt-8 md:mt-6 row-start-1 row-span-6 col-start-2'}>
-          <FormGroup label="&nbsp;" labelFor={'username'}>
+        <div className={'mt-8 row-start-1 row-span-6 col-start-2'}>
+          <FormGroup label="Выберите команду" labelFor={'username'}>
             <TeamSelect
               captains={captains}
               currentUser={currentUser}
