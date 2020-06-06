@@ -8,7 +8,7 @@ exports[`<TeamSelect /> renders correctly structured component 1`] = `
     class="relative flex flex-no-wrap shadow-lg"
   >
     <button
-      class="align-middle text-white text-center outline-none transition-colors duration-100 ease-in-out bg-blue-100 hover:bg-blue-200 btn-md w-full"
+      class="align-middle text-white text-center outline-none transition-colors duration-100 ease-in-out bg-blue-100 hover:bg-blue-200 btn-md w-full focus:outline-none"
     >
        
       Синие
@@ -33,7 +33,7 @@ exports[`<TeamSelect /> renders correctly structured component 1`] = `
       </svg>
     </span>
     <button
-      class="align-middle text-white text-center outline-none transition-colors duration-100 ease-in-out bg-gray-300 hover:bg-gray-400 btn-md w-full"
+      class="align-middle text-white text-center outline-none transition-colors duration-100 ease-in-out bg-gray-300 hover:bg-gray-400 btn-md w-full focus:outline-none"
     >
       <svg
         aria-hidden="true"
@@ -90,7 +90,7 @@ exports[`<TeamSelect /> renders correctly structured component 1`] = `
     </div>
   </div>
   <button
-    class="align-middle text-white text-center outline-none transition-colors duration-100 ease-in-out bg-blue-100 hover:bg-blue-200 btn-md w-full"
+    class="align-middle text-white text-center outline-none transition-colors duration-100 ease-in-out bg-blue-100 hover:bg-blue-200 btn-md w-full focus:outline-none"
   >
     Стать капитаном
   </button>

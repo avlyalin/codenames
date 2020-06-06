@@ -47,6 +47,7 @@ const TeamSelect = React.forwardRef(function TeamSelect(
         size={'md'}
         fullWidth={true}
         shadow={false}
+        outline={false}
         onClick={handleClickJoinAsCaptain}
       >
         Стать капитаном

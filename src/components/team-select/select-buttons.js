@@ -23,6 +23,7 @@ function SelectButtons({ userTeam, onClickJoin, ...other }) {
         fullWidth={true}
         rounded={false}
         shadow={false}
+        outline={false}
         onClick={() => onClickJoin(TEAMS['blue'])}
       >
         {!isBlueTeam && <FontAwesomeIcon icon={'user-plus'} size={'sm'} />}{' '}
@@ -40,6 +41,7 @@ function SelectButtons({ userTeam, onClickJoin, ...other }) {
         fullWidth={true}
         rounded={false}
         shadow={false}
+        outline={false}
         onClick={() => onClickJoin(TEAMS['red'])}
       >
         {!isRedTeam && <FontAwesomeIcon icon={'user-plus'} size={'sm'} />}{' '}

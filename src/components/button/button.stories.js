@@ -20,6 +20,7 @@ export const Common = () => {
     'default',
   );
   const shadow = boolean('Shadow', true);
+  const outline = boolean('Outline', true);
   const size = radios('Size', { sm: 'sm', md: 'md', lg: 'lg' }, 'md');
   return (
     <Button
@@ -29,6 +30,7 @@ export const Common = () => {
       rounded={rounded}
       shadow={shadow}
       size={size}
+      outline={outline}
     >
       {content}
     </Button>

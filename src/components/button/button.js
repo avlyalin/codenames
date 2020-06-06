@@ -11,11 +11,12 @@ const Button = React.forwardRef(function Button(props, ref) {
     shadow = true,
     size = 'md',
     disabled = false,
+    outline = false,
     ...other
   } = props;
   let colorClasses = classnames('bg-gray-300', {
     'hover:bg-gray-400': !disabled,
-    'focus:shadow-outline-sm-gray focus:outline-none': shadow,
+    'focus:shadow-outline-sm-gray': shadow,
   });
 
   let sizeClasses = '';
@@ -30,12 +31,12 @@ const Button = React.forwardRef(function Button(props, ref) {
   if (color === 'blue') {
     colorClasses = classnames('bg-blue-100', {
       'hover:bg-blue-200': !disabled,
-      'focus:shadow-outline-sm-blue focus:outline-none': shadow,
+      'focus:shadow-outline-sm-blue': shadow,
     });
   } else if (color === 'red') {
     colorClasses = classnames('bg-red-100', {
       'hover:bg-red-200': !disabled,
-      'focus:shadow-outline-sm-red focus:outline-none': shadow,
+      'focus:shadow-outline-sm-red': shadow,
     });
   }
 
@@ -54,6 +55,7 @@ const Button = React.forwardRef(function Button(props, ref) {
           'w-full': fullWidth,
           'rounded-lg': rounded,
           'bg-opacity-60': disabled,
+          'focus:outline-none': !outline,
         },
       )}
       disabled={disabled}
@@ -70,6 +72,7 @@ Button.propTypes = {
   shadow: PropTypes.bool,
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
   rounded: PropTypes.bool,
+  outline: PropTypes.bool,
 };
 
 export { Button };

@@ -138,4 +138,24 @@ describe('<Button /> visually looks correct', () => {
       expect(image).toMatchImageSnapshot(customConfig);
     });
   });
+
+  test('with outline', async () => {
+    await page.goto(
+      'http://localhost:9009/iframe.html?path=/story/components-button--common&knob-Rounded=true&knob-Disabled=&knob-Full width=true&knob-Content=Click me&knob-Color=&knob-Shadow=true&knob-Size=md&knob-Outline=true',
+    );
+    const button = await page.$('button');
+    await page.click('button');
+    const image = await button.screenshot();
+    expect(image).toMatchImageSnapshot(customConfig);
+  });
+
+  test('without outline', async () => {
+    await page.goto(
+      'http://localhost:9009/iframe.html?path=/story/components-button--common&knob-Rounded=true&knob-Disabled=&knob-Full width=true&knob-Content=Click me&knob-Color=&knob-Shadow=true&knob-Size=md&knob-Outline=false',
+    );
+    const button = await page.$('button');
+    await page.click('button');
+    const image = await button.screenshot();
+    expect(image).toMatchImageSnapshot(customConfig);
+  });
 });
