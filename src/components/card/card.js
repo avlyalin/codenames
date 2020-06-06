@@ -19,13 +19,13 @@ const Card = React.forwardRef(function Card(
 
   let colorClasses = 'bg-white';
   if (color === TEAMS['blue']) {
-    colorClasses = 'bg-blue-100 text-white';
+    colorClasses = 'bg-blue-100 border-blue-200 text-white';
   } else if (color === TEAMS['red']) {
-    colorClasses = 'bg-red-100 text-white';
+    colorClasses = 'bg-red-100 border-red-200 text-white';
   } else if (type === CARDS_TYPES['killer']) {
-    colorClasses = 'bg-gray-400 text-white';
+    colorClasses = 'bg-gray-400 border-gray-500 text-white';
   } else if (type === CARDS_TYPES['citizen']) {
-    colorClasses = 'bg-yellow-100 text-black';
+    colorClasses = 'bg-yellow-100 border-yellow-200 text-gray-500';
   }
 
   return (
@@ -35,12 +35,12 @@ const Card = React.forwardRef(function Card(
       className={classnames(
         styles.card,
         'inline-flex justify-center items-center',
-        'border border-solid border-gray-200 rounded-lg',
+        'border border-solid rounded-lg',
         'min-h-10 max-h-30',
         'uppercase font-bold truncate',
         'shadow-md',
         'select-none',
-        disclosed ? colorClasses : 'bg-white text-gray-500',
+        disclosed ? colorClasses : 'bg-white text-gray-500 border-gray-200',
         {
           'hover:shadow-b-r': !isCaptain,
           'cursor-pointer': !isCaptain,

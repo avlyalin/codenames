@@ -27,6 +27,7 @@ module.exports = {
       },
       yellow: {
         100: '#feebc8',
+        200: '#f0d6a6',
       },
     },
     extend: {
