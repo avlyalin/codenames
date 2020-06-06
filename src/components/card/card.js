@@ -25,7 +25,7 @@ const Card = React.forwardRef(function Card(
   } else if (type === CARDS_TYPES['killer']) {
     colorClasses = 'bg-gray-400 text-white';
   } else if (type === CARDS_TYPES['citizen']) {
-    colorClasses = 'bg-gray-100 text-black';
+    colorClasses = 'bg-yellow-100 text-black';
   }
 
   return (

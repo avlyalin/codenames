@@ -25,6 +25,9 @@ module.exports = {
         100: '#cb6060',
         200: '#af4848',
       },
+      yellow: {
+        100: '#feebc8',
+      },
     },
     extend: {
       inset: {
