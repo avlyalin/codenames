@@ -2,8 +2,10 @@ const {
   colors: { transparent, current, black, white },
 } = require('tailwindcss/defaultTheme');
 
+const isDev = process.env.NODE_ENV === 'development';
+
 module.exports = {
-  purge: ['./src/**/*.js', './assets/index.html'],
+  purge: { enabled: !isDev, content: ['./src/**/*.js', './assets/index.html'] },
   theme: {
     colors: {
       transparent,

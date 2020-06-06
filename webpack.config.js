@@ -7,7 +7,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyPlugin = require('copy-webpack-plugin');
 
-const isDev = process.env.NODE_ENV !== 'production';
+const isDev = process.env.NODE_ENV === 'development';
 const isAnalysis = process.env.NODE_ENV === 'analysis';
 
 const plugins = [
@@ -36,6 +36,24 @@ module.exports = {
     filename: 'app.[hash].js',
   },
   optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+      maxInitialRequests: Infinity,
+      minSize: 5000,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            const packageName = module.context.match(
+              /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
+            )[1];
+
+            return `vendors.${packageName.replace('@', '')}`;
+          },
+        },
+      },
+    },
     minimizer: [new TerserJSPlugin(), new OptimizeCSSAssetsPlugin()],
   },
   module: {
@@ -71,7 +89,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'react-dom': '@hot-loader/react-dom',
+      'react-dom': isDev ? '@hot-loader/react-dom' : 'react-dom',
       assets: path.resolve(__dirname, './assets'),
       src: path.resolve(__dirname, './src'),
       _storybook: path.resolve(__dirname, './.storybook'),
