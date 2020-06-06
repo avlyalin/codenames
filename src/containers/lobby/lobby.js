@@ -74,10 +74,11 @@ function Lobby({
       <div
         className={classnames(
           'max-w-screen-xl mx-auto',
-          'md:grid grid-flow-col grid-cols-1 grid-rows-5 md:grid-cols-2 col-gap-12 lg:col-gap-20',
+          'md:grid grid-flow-col grid-cols-1 grid-rows-6 md:grid-cols-2 col-gap-12 lg:col-gap-20',
+          'mt-4 md:mt-2 lg:mt-5 xl:mt-8',
         )}
       >
-        <div className={'mt-8 row-start-1 col-start-1'}>
+        <div className={'row-start-1 col-start-1'}>
           <FormGroup
             description={shareDescription}
             descriptionPosition={'end'}
@@ -100,7 +101,7 @@ function Lobby({
           </FormGroup>
         </div>
 
-        <div className={'mt-8 row-start-2 col-start-1'}>
+        <div className={'mt-5 md:mt-2 row-start-2 col-start-1'}>
           <RadioGroup
             color={color}
             label="Размер поля"
@@ -112,13 +113,13 @@ function Lobby({
           </RadioGroup>
         </div>
 
-        <div className={'mt-8 row-start-3 col-start-1'}>
+        <div className={'mt-5 md:mt-2 row-start-3 col-start-1'}>
           <FormGroup label={'Словарь'}>
             <Select onChange={onChangeDictionary}>{dictionaries}</Select>
           </FormGroup>
         </div>
 
-        <div className={'mt-8 row-start-4 col-start-1'}>
+        <div className={'mt-5 md:mt-2 row-start-4 col-start-1'}>
           <FormGroup label={'Ваш ник'} labelFor={'username'}>
             <Input
               id={'username'}
@@ -128,7 +129,7 @@ function Lobby({
           </FormGroup>
         </div>
 
-        <div className={'mt-8 row-start-1 row-span-6 col-start-2'}>
+        <div className={'mt-5 md:mt-0 row-start-1 row-span-5 col-start-2'}>
           <FormGroup label="Выберите команду" labelFor={'username'}>
             <TeamSelect
               captains={captains}
@@ -140,13 +141,13 @@ function Lobby({
           </FormGroup>
         </div>
 
-        <div className={'mt-8 row-start-5 col-start-1'}>
+        <div className={'mt-5 md:mt-2 row-start-5 col-start-1'}>
           <Button color={color} onClick={onClickGenerateCards}>
             <FontAwesomeIcon icon="retweet" size="lg" /> Сгенерировать карточки
           </Button>
         </div>
 
-        <div className={'mt-8 md:mt-0 row-start-6 col-start-1'}>
+        <div className={'mt-5 md:mt-2 row-start-6 col-start-1'}>
           <Link to="/game">
             <Button color={color}>
               <FontAwesomeIcon icon="running" size="lg" /> Погнали
