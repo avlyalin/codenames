@@ -1,5 +1,8 @@
 .radio {
-  @apply relative pl-9;
+  @apply relative;
+  @apply inline-flex;
+  @apply pl-9;
+  @apply tracking-wide;
 }
 
 .radio__input {
@@ -7,9 +10,9 @@
 }
 
 .radio__button {
-  margin-top: 0.1rem;
   @apply absolute left-0 top-0;
-  @apply w-5 h-5;
+  height: 1.4rem;
+  width: 1.4rem;
   @apply border-2 border-solid border-gray-400 rounded-full;
   @apply cursor-pointer;
   @apply text-gray-400;
@@ -25,9 +28,8 @@
 }
 
 .radio__button-shape {
-  @apply align-middle;
   @apply w-3 h-full;
-  @apply my-0 mx-auto;
+  @apply mx-auto;
   @apply opacity-0;
   @apply transition-opacity duration-200 ease-in-out;
 }
