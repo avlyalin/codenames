@@ -21,6 +21,7 @@ const Select = React.forwardRef(function Select(props, ref) {
           'w-full',
           'pl-3 pr-10 py-2',
           'text-black',
+          'bg-white',
           'border border-solid border-gray-200 rounded-lg hover:border-gray-300',
           'focus:outline-none focus:shadow-outline-sm',
         )}
