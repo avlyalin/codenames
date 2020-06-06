@@ -27,11 +27,7 @@ const TeamSelect = React.forwardRef(function TeamSelect(
   };
 
   return (
-    <div
-      ref={ref}
-      className="w-full border-t border-b border-solid border-gray-200 rounded-lg overflow-hidden"
-      {...other}
-    >
+    <div ref={ref} className="w-full rounded-lg overflow-hidden" {...other}>
       <SelectButtons
         userTeam={currentUser.team}
         onClickJoin={handleClickJoin}

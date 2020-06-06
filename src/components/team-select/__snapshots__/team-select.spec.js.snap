@@ -2,7 +2,7 @@
 
 exports[`<TeamSelect /> renders correctly structured component 1`] = `
 <div
-  class="w-full border-t border-b border-solid border-gray-200 rounded-lg overflow-hidden"
+  class="w-full rounded-lg overflow-hidden"
 >
   <div
     class="relative flex flex-no-wrap shadow-lg"
