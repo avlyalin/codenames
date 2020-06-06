@@ -9,7 +9,7 @@ import {
   LANGUAGES,
   TEAMS,
 } from 'src/data/constants';
-import { getGameLink, getGameSessionId } from 'src/utils/query-params';
+import * as Location from 'src/utils/location';
 import * as FirebaseService from 'src/service';
 import { getRemainingCardsCount } from 'src/utils/team-progress';
 import { Loader } from 'src/components/loader';
@@ -61,7 +61,7 @@ class App extends Component {
   }
 
   async connectToSession() {
-    let sessionId = getGameSessionId(window.location.href);
+    let sessionId = Location.getGameSessionId(window.location.href);
     let userId;
 
     if (sessionId) {
@@ -70,6 +70,7 @@ class App extends Component {
       ({ sessionId, userId } = await FirebaseService.initialize(
         this.state.settings,
       ));
+      Location.setGameSessionId(sessionId);
     }
     this.sessionId = sessionId;
     this.setState(
@@ -173,10 +174,10 @@ class App extends Component {
     if (navigator.share) {
       navigator.share({
         title: 'Codenames - кодовые имена',
-        url: getGameLink(this.sessionId),
+        url: Location.getGameLink(this.sessionId),
       });
     } else {
-      copy(getGameLink(this.sessionId));
+      copy(Location.getGameLink(this.sessionId));
     }
   }
 

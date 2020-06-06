@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { getGameSessionId } from 'src/utils/query-params';
+import { getGameSessionId } from 'src/utils/location';
 import * as Errors from '../../data/errors';
 import { Game } from './game';
 
