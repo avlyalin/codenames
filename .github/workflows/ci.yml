@@ -17,7 +17,8 @@ jobs:
         with:
           persist-credentials: false
 
-      - run: npm ci
+      - uses: bahmutov/npm-install@v1
+      - run: npm t
 
       - run: npm run build
         env:

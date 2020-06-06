@@ -17,7 +17,8 @@ jobs:
         with:
           persist-credentials: false
 
-      - run: npm ci
+      - uses: bahmutov/npm-install@v1
+      - run: npm t
 
       - run: npm run build
         env:
@@ -29,18 +30,18 @@ jobs:
           FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
 
-#      - name: Run tests
-#        run: npm run test
-#
-#      - name: Run visual regression tests
-#        run: npm run test:integration
-#
-#      - name: Upload screenshots diffs
-#        uses: actions/upload-artifact@v2
-#        if: always()
-#        with:
-#          name: screenshots
-#          path: src/**/__diff_output__
+      - name: Run tests
+        run: npm run test
+
+      - name: Run visual regression tests
+        run: npm run test:integration
+
+      - name: Upload screenshots diffs
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: screenshots
+          path: src/**/__diff_output__
 
       - name: Upload build
         uses: actions/upload-artifact@v2
@@ -57,15 +58,11 @@ jobs:
         with:
           persist-credentials: false
 
-      - run: ls -la && ls -la ./public
-
       - name: Download Artifacts
         uses: actions/download-artifact@v2
         with:
           name: build
           path: public
-
-      - run: ls -la && ls -la ./public
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
