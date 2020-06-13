@@ -1,7 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import rotateImage from 'assets/images/rotate-device.svg';
 
 const RotateDevice = React.forwardRef(function RotateDevice(props, ref) {
+  const { t } = useTranslation();
+
   return (
     <div
       ref={ref}
@@ -18,7 +21,7 @@ const RotateDevice = React.forwardRef(function RotateDevice(props, ref) {
           'w-full p-3 text-md uppercase font-bold text-center text-gray-500'
         }
       >
-        Пожалуйста, переверните устройство
+        {t('common.rotateDevice')}
       </span>
     </div>
   );

@@ -2,6 +2,7 @@ import { addParameters } from '@storybook/react';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import '../src/styles/styles.css';
 import '../src/icons/icons';
+import '../src/utils/i18n';
 
 addParameters({
   options: {

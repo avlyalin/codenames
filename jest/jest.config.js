@@ -1,6 +1,7 @@
 module.exports = {
   rootDir: '../',
   moduleFileExtensions: ['js', 'json'],
+  modulePaths: ['<rootDir>/src'],
   moduleNameMapper: {
     '^.+\\.module\\.css$': 'identity-obj-proxy',
     '^src(.*)$': '<rootDir>/src$1',

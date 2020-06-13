@@ -1,0 +1,32 @@
+{
+  "root": {
+    "appLoadingText": "Запуск приложения"
+  },
+  "lobby": {
+    "sessionId": "ID сессии",
+    "fieldSize": "Размер поля",
+    "copyLink": "Копировать ссылку",
+    "share": "Поделиться",
+    "setUsername": "Ваш ник",
+    "chooseTeam": "Выберите команду",
+    "generateCards": "Сгенерировать карточки",
+    "startGame": "Погнали",
+    "dictionary": "Словарь"
+  },
+  "game": {
+    "leave": "Покинуть игру",
+    "blueWin": "Победа синих",
+    "redWin": "Победа красных"
+  },
+  "common": {
+    "rotateDevice": "Пожалуйста, переверните устройство",
+    "blueTeam": "Синяя команда",
+    "redTeam": "Красная команда",
+    "blues": "Синие",
+    "reds": "Красные",
+    "becomeCaptain": "Стать капитаном",
+    "captain": "Капитан"
+  },
+  "error": {
+  }
+}

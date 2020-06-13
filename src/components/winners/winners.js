@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { useTranslation } from 'react-i18next';
 import { TEAMS } from 'src/data/constants';
 import { Line } from 'src/components/winners/line';
 import { Circle } from 'src/components/winners/circle';
 
 const Winners = React.forwardRef(function Winners({ team }, ref) {
-  const winnerTeam = team === TEAMS['blue'] ? 'синих' : 'красных';
+  const { t } = useTranslation();
+
+  const message = team === TEAMS['blue'] ? t('game.blueWin') : t('game.redWin');
+  const words = message.split(' ');
+  const [leftMessage = '', rightMessage = ''] = words;
 
   return (
     <div
@@ -20,9 +25,9 @@ const Winners = React.forwardRef(function Winners({ team }, ref) {
         },
       )}
     >
-      <Line position={'left'} content={'победа'} />
+      <Line position={'left'} content={leftMessage} />
       <Circle team={team} />
-      <Line position={'right'} content={winnerTeam} />
+      <Line position={'right'} content={rightMessage} />
     </div>
   );
 });

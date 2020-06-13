@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import { Button } from 'src/components/button';
 import { SelectButtons } from 'src/components/team-select/select-buttons';
 import { PlayersList } from 'src/components/team-select/players-list';
@@ -9,6 +10,8 @@ const TeamSelect = React.forwardRef(function TeamSelect(
   { currentUser, captains, users, onJoin, onJoinAsCaptain, ...other },
   ref,
 ) {
+  const { t } = useTranslation();
+
   let color = 'default';
   let captainId = '';
   if (currentUser.team === TEAMS['blue']) {
@@ -46,7 +49,7 @@ const TeamSelect = React.forwardRef(function TeamSelect(
         outline={false}
         onClick={handleClickJoinAsCaptain}
       >
-        Стать капитаном
+        {t('common.becomeCaptain')}
       </Button>
     </div>
   );

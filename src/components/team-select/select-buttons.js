@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTranslation } from 'react-i18next';
 import { Button } from 'src/components/button';
 import { TEAMS } from 'src/data/constants';
 import { Icon } from 'src/components/icon';
 
 function SelectButtons({ userTeam, onClickJoin, ...other }) {
+  const { t } = useTranslation();
+
   const isBlueTeam = userTeam === TEAMS['blue'];
   const isRedTeam = userTeam === TEAMS['red'];
 
@@ -27,7 +30,7 @@ function SelectButtons({ userTeam, onClickJoin, ...other }) {
         onClick={() => onClickJoin(TEAMS['blue'])}
       >
         {!isBlueTeam && <FontAwesomeIcon icon={'user-plus'} size={'sm'} />}{' '}
-        Синие
+        {t('common.blues')}
       </Button>
 
       <Icon
@@ -45,7 +48,7 @@ function SelectButtons({ userTeam, onClickJoin, ...other }) {
         onClick={() => onClickJoin(TEAMS['red'])}
       >
         {!isRedTeam && <FontAwesomeIcon icon={'user-plus'} size={'sm'} />}{' '}
-        Красные
+        {t('common.reds')}
       </Button>
     </div>
   );

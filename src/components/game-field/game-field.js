@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTranslation } from 'react-i18next';
 import { TEAMS } from 'src/data/constants';
 import { ScoresBar } from 'src/components/scores-bar';
 import { Button } from 'src/components/button';
@@ -11,6 +12,8 @@ import { Cards } from './cards';
 
 function GameField(props) {
   const { currentUser, cards, captains, winnerTeam, onOpenCard } = props;
+
+  const { t } = useTranslation();
 
   let color = 'default';
   let bgColor = '';
@@ -55,7 +58,7 @@ function GameField(props) {
       >
         <Link className="w-full" to="/">
           <Button classes={'sm:btn-sm md:btn-md lg:btn-lg'} color={color}>
-            <FontAwesomeIcon icon="sign-out-alt" /> Покинуть игру
+            <FontAwesomeIcon icon="sign-out-alt" /> {t('game.leave')}
           </Button>
         </Link>
       </div>

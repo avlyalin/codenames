@@ -2,6 +2,7 @@ import { hot } from 'react-hot-loader/root';
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import copy from 'copy-to-clipboard';
+import { Translation } from 'react-i18next';
 import {
   CARDS_DICTIONARIES,
   CARDS_TYPES,
@@ -41,7 +42,6 @@ class App extends Component {
       },
       winnerTeam: '',
       isLoading: true,
-      loadingText: 'Запуск приложения',
     };
     this.sessionId = '';
   }
@@ -189,10 +189,14 @@ class App extends Component {
     return (
       <>
         {this.state.isLoading && (
-          <Loader
-            isLoading={this.state.isLoading}
-            text={this.state.loadingText}
-          />
+          <Translation>
+            {(t) => (
+              <Loader
+                isLoading={this.state.isLoading}
+                text={t('root.appLoadingText')}
+              />
+            )}
+          </Translation>
         )}
         <Router>
           <Switch>

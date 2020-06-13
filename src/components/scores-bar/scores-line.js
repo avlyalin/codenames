@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { useTranslation } from 'react-i18next';
 import { TEAMS } from 'src/data/constants';
 import { Icon } from 'src/components/icon';
 import {
@@ -10,10 +11,13 @@ import {
 import styles from './scores-line.module.css';
 
 function ScoresLine({ cards, team, position }) {
+  const { t } = useTranslation();
+
   const remainingCards = getRemainingCardsCount(cards, team);
   const progress = getTeamProgress(cards, team);
   const progressWidth = `${progress}%`;
-  const teamName = team === TEAMS['blue'] ? 'Синяя команда' : 'Красная команда';
+  const teamName =
+    team === TEAMS['blue'] ? t('common.blueTeam') : t('common.redTeam');
 
   return (
     <div

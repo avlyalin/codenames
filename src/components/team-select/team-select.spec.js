@@ -74,7 +74,7 @@ describe('<TeamSelect />', () => {
       const onJoin = jest.fn();
       const { getByText } = setup({ onJoin });
 
-      const joinButton = getByText('Красные');
+      const joinButton = getByText('common.reds');
       fireEvent.click(joinButton);
 
       expect(onJoin).toHaveBeenCalledTimes(1);
@@ -85,7 +85,7 @@ describe('<TeamSelect />', () => {
       captains['blue'] = '100';
       const { getByText } = setup({ onJoin });
 
-      const joinButton = getByText('Синие');
+      const joinButton = getByText('common.blues');
       fireEvent.click(joinButton);
 
       expect(onJoin).not.toHaveBeenCalled();
@@ -94,7 +94,7 @@ describe('<TeamSelect />', () => {
       const onJoin = jest.fn();
       const { getByText } = setup({ onJoin });
 
-      const joinButton = getByText('Синие');
+      const joinButton = getByText('common.blues');
       fireEvent.click(joinButton);
 
       expect(onJoin).toHaveBeenCalledTimes(1);
@@ -108,7 +108,7 @@ describe('<TeamSelect />', () => {
       captains['blue'] = '';
       const { getByText } = setup({ onJoinAsCaptain });
 
-      const joinButton = getByText('Стать капитаном');
+      const joinButton = getByText('common.becomeCaptain');
       fireEvent.click(joinButton);
 
       expect(onJoinAsCaptain).toHaveBeenCalledTimes(1);
@@ -118,7 +118,7 @@ describe('<TeamSelect />', () => {
       const onJoinAsCaptain = jest.fn();
       const { getByText } = setup({ onJoinAsCaptain });
 
-      const joinButton = getByText('Стать капитаном');
+      const joinButton = getByText('common.becomeCaptain');
       fireEvent.click(joinButton);
 
       expect(onJoinAsCaptain).not.toHaveBeenCalled();
@@ -131,7 +131,7 @@ describe('<TeamSelect />', () => {
     const captainBadge = captain.childNodes[1];
 
     expect(captainBadge).toBeTruthy();
-    expect(captainBadge.textContent).toEqual(expect.stringMatching(/капитан/i));
+    expect(captainBadge.textContent).toEqual(expect.stringMatching(/captain/i));
 
     captains['blue'] = '3';
     rerender(
@@ -150,7 +150,7 @@ describe('<TeamSelect />', () => {
 
     expect(oldCaptain.childNodes.length).toBe(1);
     expect(newCaptainBadge.textContent).toEqual(
-      expect.stringMatching(/капитан/i),
+      expect.stringMatching(/captain/i),
     );
   });
 });

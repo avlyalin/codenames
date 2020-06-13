@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Link, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTranslation } from 'react-i18next';
 import { CARDS_DICTIONARIES, FIELD_SIZES, TEAMS } from 'src/data/constants';
 import { TeamSelect } from 'src/components/team-select';
 import { WithRadioGroup as Radio } from 'src/components/radio';
@@ -27,6 +28,7 @@ function Lobby({
   onClickShare,
   onClickGenerateCards,
 }) {
+  const { t } = useTranslation();
   const history = useHistory();
 
   const onChangeFieldSize = (e) => {
@@ -58,8 +60,12 @@ function Lobby({
     bgColor = 'bg-red-linear md:bg-red-linear-image';
   }
 
-  const shareIcon = navigator.share ? 'share-alt' : 'clone';
-  const shareDescription = navigator.share ? 'Поделиться' : 'Копировать ссылку';
+  let shareIcon = 'clone',
+    shareDescription = t('lobby.copyLink');
+  if (navigator.share) {
+    shareIcon = 'share-alt';
+    shareDescription = t('lobby.share');
+  }
 
   const redirectToGame = () => {
     history.push('game');
@@ -88,7 +94,7 @@ function Lobby({
           <FormGroup
             description={shareDescription}
             descriptionPosition={'end'}
-            label={'ID сессии'}
+            label={t('lobby.sessionId')}
           >
             <InputGroup
               append={
@@ -110,7 +116,7 @@ function Lobby({
         <div className={'mt-5 md:mt-2 row-start-2 col-start-1'}>
           <RadioGroup
             color={color}
-            label="Размер поля"
+            label={t('lobby.fieldSize')}
             value={settings.fieldSize}
             name="field-size"
             onChange={onChangeFieldSize}
@@ -120,7 +126,7 @@ function Lobby({
         </div>
 
         <div className={'mt-5 md:mt-2 row-start-3 col-start-1'}>
-          <FormGroup label={'Словарь'}>
+          <FormGroup label={t('lobby.dictionary')}>
             <Select value={settings.dictionary} onChange={onChangeDictionary}>
               {dictionaries}
             </Select>
@@ -128,7 +134,7 @@ function Lobby({
         </div>
 
         <div className={'mt-5 md:mt-2 row-start-4 col-start-1'}>
-          <FormGroup label={'Ваш ник'} labelFor={'username'}>
+          <FormGroup label={t('lobby.setUsername')} labelFor={'username'}>
             <Input
               id={'username'}
               value={currentUser.name}
@@ -138,7 +144,7 @@ function Lobby({
         </div>
 
         <div className={'mt-5 md:mt-0 row-start-1 row-span-5 col-start-2'}>
-          <FormGroup label="Выберите команду" labelFor={'username'}>
+          <FormGroup label={t('lobby.chooseTeam')} labelFor={'username'}>
             <TeamSelect
               captains={captains}
               currentUser={currentUser}
@@ -151,13 +157,14 @@ function Lobby({
 
         <div className={'mt-5 md:mt-2 row-start-5 col-start-1'}>
           <Button color={color} onClick={onClickGenerateCards}>
-            <FontAwesomeIcon icon="retweet" size="lg" /> Сгенерировать карточки
+            <FontAwesomeIcon icon="retweet" size="lg" />{' '}
+            {t('lobby.generateCards')}
           </Button>
         </div>
 
         <div className={'mt-5 md:mt-2 row-start-6 col-start-1'}>
           <Button color={color} onClick={redirectToGame}>
-            <FontAwesomeIcon icon="running" size="lg" /> Погнали
+            <FontAwesomeIcon icon="running" size="lg" /> {t('lobby.startGame')}
           </Button>
         </div>
       </div>
