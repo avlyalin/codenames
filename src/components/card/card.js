@@ -51,6 +51,7 @@ const Card = React.forwardRef(function Card(
         })}
       >
         <div
+          data-testid={'card-cover'}
           className={classnames(
             styles.cardFront,
             'bg-white text-gray-500 border-gray-200',

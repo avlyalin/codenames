@@ -15,9 +15,17 @@ describe('<Card />', () => {
       const onOpen = jest.fn();
       const card = getBlueAgentCard();
       const isCaptain = false;
-      const { element } = setup({ isCaptain, card, onOpen });
+      const { element, getByTestId } = setup({ isCaptain, card, onOpen });
 
-      fireEvent.click(element);
+      fireEvent.mouseDown(element);
+
+      /* dirty hack to test "ontransitionend" callback */
+      const transitionEndEvent = new Event('transitionend', {
+        bubbles: true,
+        cancelable: false,
+      });
+      transitionEndEvent.propertyName = 'background-size';
+      fireEvent(getByTestId('card-cover'), transitionEndEvent);
 
       expect(onOpen).toHaveBeenCalledTimes(1);
     });
