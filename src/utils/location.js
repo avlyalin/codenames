@@ -13,6 +13,6 @@ export function setGameSessionId(sessionId) {
   searchParams.set('gameId', sessionId);
   const newRelativePathQuery = `${
     window.location.pathname
-  }?${searchParams.toString()}`;
-  history.pushState(null, '', newRelativePathQuery);
+  }?${searchParams.toString()}${window.location.hash}`;
+  window.history.pushState(null, '', newRelativePathQuery);
 }

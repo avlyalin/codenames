@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { CARDS_DICTIONARIES, FIELD_SIZES, TEAMS } from 'src/data/constants';
 import { TeamSelect } from 'src/components/team-select';
@@ -27,6 +27,8 @@ function Lobby({
   onClickShare,
   onClickGenerateCards,
 }) {
+  const history = useHistory();
+
   const onChangeFieldSize = (e) => {
     onChangeSettings({ ...settings, fieldSize: e.target.value });
   };
@@ -58,6 +60,10 @@ function Lobby({
 
   const shareIcon = navigator.share ? 'share-alt' : 'clone';
   const shareDescription = navigator.share ? 'Поделиться' : 'Копировать ссылку';
+
+  const redirectToGame = () => {
+    history.push('game');
+  };
 
   return (
     <div
@@ -148,11 +154,9 @@ function Lobby({
         </div>
 
         <div className={'mt-5 md:mt-2 row-start-6 col-start-1'}>
-          <Link to="/game">
-            <Button color={color}>
-              <FontAwesomeIcon icon="running" size="lg" /> Погнали
-            </Button>
-          </Link>
+          <Button color={color} onClick={redirectToGame}>
+            <FontAwesomeIcon icon="running" size="lg" /> Погнали
+          </Button>
         </div>
       </div>
     </div>
