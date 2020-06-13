@@ -2,6 +2,7 @@
 @import 'tailwindcss/components.css';
 @import 'tailwindcss/utilities.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+@import "./toastify.css";
 
 body {
     font-family: 'Roboto', sans-serif;

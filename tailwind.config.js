@@ -26,10 +26,14 @@ module.exports = {
       red: {
         100: '#cb6060',
         200: '#af4848',
+        300: '#db4242',
       },
       yellow: {
         100: '#feebc8',
         200: '#f0d6a6',
+      },
+      green: {
+        400: '#4ec362',
       },
     },
     extend: {

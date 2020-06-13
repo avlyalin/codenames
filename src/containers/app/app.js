@@ -2,7 +2,8 @@ import { hot } from 'react-hot-loader/root';
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import copy from 'copy-to-clipboard';
-import { Translation } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
+import { ToastContainer, Slide } from 'react-toastify';
 import {
   CARDS_DICTIONARIES,
   CARDS_TYPES,
@@ -13,6 +14,7 @@ import {
 import * as Location from 'src/utils/location';
 import * as FirebaseService from 'src/service';
 import { getRemainingCardsCount } from 'src/utils/team-progress';
+import { toast } from 'src/utils/toast';
 import { Loader } from 'src/components/loader';
 import { Lobby } from '../lobby';
 import { NotFound } from '../not-found';
@@ -44,6 +46,8 @@ class App extends Component {
       isLoading: true,
     };
     this.sessionId = '';
+    // eslint-disable-next-line react/prop-types
+    this.t = props.t;
   }
 
   async componentDidMount() {
@@ -172,31 +176,55 @@ class App extends Component {
 
   shareSession() {
     if (navigator.share) {
-      navigator.share({
-        title: 'Codenames - кодовые имена',
-        url: Location.getGameLink(this.sessionId),
-      });
+      navigator
+        .share({
+          title: this.t('root.title'),
+          url: Location.getGameLink(this.sessionId),
+        })
+        .then(() => {
+          toast.success(this.t('root.linkCopied'));
+        })
+        .catch(() => {
+          toast.error(this.t('error.linkNotCopied'));
+        });
     } else {
-      copy(Location.getGameLink(this.sessionId));
+      const isCopied = copy(Location.getGameLink(this.sessionId));
+      if (isCopied) {
+        toast.success(this.t('root.linkCopied'));
+      } else {
+        toast.error(this.t('error.linkNotCopied'));
+      }
     }
   }
 
   generateCards() {
-    FirebaseService.saveSettings(this.sessionId, this.state.settings);
+    FirebaseService.saveSettings(this.sessionId, this.state.settings)
+      .then(() => {
+        toast.success(this.t('root.cardsUpdated'));
+      })
+      .catch(() => {
+        toast.error(this.t('root.cardsNotUpdated'));
+      });
   }
 
   render() {
     return (
       <>
+        <ToastContainer
+          position="top-left"
+          autoClose={1500}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          draggable={false}
+          className={'absolute'}
+          transition={Slide}
+        />
         {this.state.isLoading && (
-          <Translation>
-            {(t) => (
-              <Loader
-                isLoading={this.state.isLoading}
-                text={t('root.appLoadingText')}
-              />
-            )}
-          </Translation>
+          <Loader
+            isLoading={this.state.isLoading}
+            text={this.t('root.appLoadingText')}
+          />
         )}
         <Router>
           <Switch>
@@ -234,6 +262,6 @@ class App extends Component {
   }
 }
 
-const HotApp = hot(App);
+const HotApp = hot(withTranslation()(App));
 
 export { HotApp as App };

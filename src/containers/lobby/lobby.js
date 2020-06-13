@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
 import { CARDS_DICTIONARIES, FIELD_SIZES, TEAMS } from 'src/data/constants';
@@ -158,7 +158,7 @@ function Lobby({
         <div className={'mt-5 md:mt-2 row-start-5 col-start-1'}>
           <Button color={color} onClick={onClickGenerateCards}>
             <FontAwesomeIcon icon="retweet" size="lg" />{' '}
-            {t('lobby.generateCards')}
+            {t('lobby.updateCards')}
           </Button>
         </div>
 

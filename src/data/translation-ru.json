@@ -1,6 +1,9 @@
 {
   "root": {
-    "appLoadingText": "Запуск приложения"
+    "appLoadingText": "Запуск приложения",
+    "linkCopied": "Ссылка скопирована",
+    "title": "Codenames - кодовые имена",
+    "cardsUpdated": "Карточки обновлены"
   },
   "lobby": {
     "sessionId": "ID сессии",
@@ -9,7 +12,7 @@
     "share": "Поделиться",
     "setUsername": "Ваш ник",
     "chooseTeam": "Выберите команду",
-    "generateCards": "Сгенерировать карточки",
+    "updateCards": "Обновить карточки",
     "startGame": "Погнали",
     "dictionary": "Словарь"
   },
@@ -28,5 +31,7 @@
     "captain": "Капитан"
   },
   "error": {
+    "linkNotCopied": "Ошибка. Не удалось скопировать ссылку",
+    "cardsNotUpdated": "Ошибка. Не удалось обновить карточки"
   }
 }
