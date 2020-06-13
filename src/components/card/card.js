@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { CARDS_TYPES, TEAMS } from 'src/data/constants';
@@ -9,48 +9,77 @@ const Card = React.forwardRef(function Card(
   ref,
 ) {
   const { text, type, color, opened } = card;
-  const disclosed = opened || isCaptain;
 
-  const handleClick = () => {
-    if (!isCaptain && !opened) {
+  const [opening, setOpening] = useState(false);
+  const [openingFinished, setOpeningFinished] = useState(false);
+
+  const handleTouchStart = () => {
+    setOpening(true);
+  };
+
+  const handleMouseDown = (e) => {
+    if (Number(e.button) === 0) setOpening(true);
+  };
+
+  const stopOpening = () => {
+    setOpening(false);
+  };
+
+  const handleCoverTransitionEnd = (e) => {
+    if (e.propertyName === 'background-size' && opening === true) {
+      setOpeningFinished(true);
       onOpen();
     }
   };
-
-  let colorClasses = 'bg-white';
-  if (color === TEAMS['blue']) {
-    colorClasses = 'bg-blue-100 border-blue-200 text-white';
-  } else if (color === TEAMS['red']) {
-    colorClasses = 'bg-red-100 border-red-200 text-white';
-  } else if (type === CARDS_TYPES['killer']) {
-    colorClasses = 'bg-gray-400 border-gray-500 text-white';
-  } else if (type === CARDS_TYPES['citizen']) {
-    colorClasses = 'bg-yellow-100 border-yellow-200 text-gray-500';
-  }
 
   return (
     <div
       data-testid={'card'}
       ref={ref}
-      className={classnames(
-        styles.card,
-        'inline-flex justify-center items-center',
-        'border border-solid rounded-lg',
-        'min-h-10 max-h-30',
-        'uppercase font-bold truncate',
-        'shadow-md',
-        'select-none',
-        disclosed ? colorClasses : 'bg-white text-gray-500 border-gray-200',
-        {
-          'hover:shadow-b-r': !isCaptain,
-          'cursor-pointer': !isCaptain,
-          'opacity-25': opened && isCaptain,
-        },
-      )}
-      onClick={handleClick}
+      className={classnames(styles.card, 'relative min-h-10 max-h-30')}
+      onMouseDown={handleMouseDown}
+      onMouseUp={stopOpening}
+      onMouseLeave={stopOpening}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={stopOpening}
+      onTouchCancel={stopOpening}
       {...other}
     >
-      {text}
+      <div
+        className={classnames(styles.cardInner, {
+          [styles.cardInnerOpened]: opened || isCaptain,
+        })}
+      >
+        <div
+          className={classnames(
+            styles.cardFront,
+            'bg-white text-gray-500 border-gray-200',
+            'bg-no-repeat bg-left-center',
+            'hover:shadow-b-r',
+            'cursor-pointer',
+            {
+              [styles.cardFrontCover]: opening || openingFinished,
+            },
+          )}
+          onTransitionEnd={handleCoverTransitionEnd}
+        >
+          {text}
+        </div>
+
+        <div
+          className={classnames(styles.cardBack, {
+            'bg-blue-100 border-blue-200 text-white': color === TEAMS['blue'],
+            'bg-red-100 border-red-200 text-white': color === TEAMS['red'],
+            'bg-gray-400 border-gray-500 text-white':
+              type === CARDS_TYPES['killer'],
+            'bg-yellow-100 border-yellow-200 text-gray-500':
+              type === CARDS_TYPES['citizen'],
+            'opacity-25': opened && isCaptain,
+          })}
+        >
+          {text}
+        </div>
+      </div>
     </div>
   );
 });

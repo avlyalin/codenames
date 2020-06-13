@@ -1,5 +1,41 @@
 .card {
     font-size: 1.7vw;
+    perspective: 1000px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.card__inner {
+    @apply relative h-full w-full;
+    @apply transition-transform ease-in-out duration-900;
+    transform-style: preserve-3d;
+}
+
+.card__inner_opened {
+    transform: rotateY(180deg);
+}
+
+.card__front, .card__back {
+    @apply absolute h-full w-full;
+    @apply inline-flex justify-center items-center;
+    @apply rounded-lg;
+    @apply shadow-md;
+    @apply truncate uppercase font-bold;
+    @apply select-none;
+    backface-visibility: hidden;
+}
+
+.card__front {
+    background-size: 0, 100%;
+    background-image: linear-gradient(to top, #eeeeee 0, #eeeeee 100%);
+    transition: background-size 0.9s linear;
+}
+
+.card__front_cover {
+    background-size: 100%, 100%;
+}
+
+.card__back {
+    transform: rotateY(180deg);
 }
 
 @responsive {

@@ -91,6 +91,9 @@ module.exports = {
       translate: {
         '1/4': '25%',
       },
+      transitionDuration: {
+        '900': '900ms',
+      },
     },
   },
   variants: {
