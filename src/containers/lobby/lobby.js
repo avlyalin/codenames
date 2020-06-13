@@ -121,7 +121,9 @@ function Lobby({
 
         <div className={'mt-5 md:mt-2 row-start-3 col-start-1'}>
           <FormGroup label={'Словарь'}>
-            <Select onChange={onChangeDictionary}>{dictionaries}</Select>
+            <Select value={settings.dictionary} onChange={onChangeDictionary}>
+              {dictionaries}
+            </Select>
           </FormGroup>
         </div>
 
