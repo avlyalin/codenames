@@ -6,7 +6,7 @@ import { ScoresLine } from './scores-line';
 
 const ScoresBar = React.forwardRef(function ScoresBar(props, ref) {
   const { cards, currentUser } = props;
-  const iconColor = currentUser.team || '';
+  const iconColor = currentUser.team || 'default';
 
   return (
     <div ref={ref} className="flex flex-no-wrap items-center w-full relative">
