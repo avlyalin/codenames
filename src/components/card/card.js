@@ -36,7 +36,7 @@ const Card = React.forwardRef(function Card(
     <div
       data-testid={'card'}
       ref={ref}
-      className={classnames(styles.card, 'relative min-h-10 max-h-30')}
+      className={classnames(styles.card, 'relative')}
       onMouseDown={handleMouseDown}
       onMouseUp={stopOpening}
       onMouseLeave={stopOpening}
@@ -46,7 +46,7 @@ const Card = React.forwardRef(function Card(
       {...other}
     >
       <div
-        className={classnames(styles.cardInner, {
+        className={classnames(styles.cardInner, 'min-h-8', {
           [styles.cardInnerOpened]: opened || isCaptain,
         })}
       >
