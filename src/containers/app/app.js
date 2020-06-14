@@ -176,17 +176,10 @@ class App extends Component {
 
   shareSession() {
     if (navigator.share) {
-      navigator
-        .share({
-          title: this.t('root.title'),
-          url: Location.getGameLink(this.sessionId),
-        })
-        .then(() => {
-          toast.success(this.t('root.linkCopied'));
-        })
-        .catch(() => {
-          toast.error(this.t('error.linkNotCopied'));
-        });
+      navigator.share({
+        title: this.t('root.title'),
+        url: Location.getGameLink(this.sessionId),
+      });
     } else {
       const isCopied = copy(Location.getGameLink(this.sessionId));
       if (isCopied) {
