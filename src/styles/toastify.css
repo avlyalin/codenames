@@ -22,7 +22,7 @@
 .Toastify__toast--info {
 }
 .Toastify__toast--success {
-    @apply bg-green-400;
+    @apply bg-blue-100;
 }
 .Toastify__toast--warning {
 }
