@@ -1,18 +1,21 @@
 import { getRandomInt } from 'src/utils/math';
-import dictionaries from 'src/data/dictionaries';
 import {
   TEAMS,
   CARDS_DICTIONARIES,
   CARDS_TYPES,
   FIELD_SIZES,
 } from 'src/data/constants';
+import { getDictionary } from 'src/dictionaries-client';
 
-export function getGamingCards(
-  dictionaryName = CARDS_DICTIONARIES['GAGA'],
-  fieldSize = FIELD_SIZES['5x5'],
-) {
+export function getDefaultDictionary(language) {
+  return CARDS_DICTIONARIES.find((dict) => dict.language === language);
+}
+
+export async function getGamingCards(dictionaryFileName, fieldSize) {
+  const dictionary = await getDictionary(dictionaryFileName);
   const cardsDivision = getCardsDivision(fieldSize);
-  const wordsGenerator = generateDictionaryWord(dictionaryName);
+  const wordsGenerator = generateDictionaryWord(dictionary);
+
   const cards = [];
   // killer cards
   for (let i = 0; i < cardsDivision['killerCards']; i++) {
@@ -55,13 +58,7 @@ export function getGamingCards(
   return shuffle(cards);
 }
 
-export function* generateDictionaryWord(
-  dictionaryName = CARDS_DICTIONARIES['GAGA'],
-) {
-  if (!(dictionaryName in dictionaries)) {
-    throw new TypeError('Словарь не найден');
-  }
-  const dictionary = dictionaries[dictionaryName];
+export function* generateDictionaryWord(dictionary) {
   let wordsIndexes = {};
   for (let i = 0; i < dictionary.length; i++) {
     let wordIndex = getRandomInt(dictionary.length);

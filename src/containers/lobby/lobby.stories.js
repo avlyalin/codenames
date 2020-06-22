@@ -32,7 +32,7 @@ export const Common = () => {
   const settings = {
     language: LANGUAGES['ru'],
     fieldSize: FIELD_SIZES['5x5'],
-    dictionary: CARDS_DICTIONARIES['GAGA'],
+    dictionaryFileName: CARDS_DICTIONARIES[0],
   };
   const captains = {
     [TEAMS['blue']]: '2',

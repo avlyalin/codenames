@@ -28,26 +28,33 @@ function Lobby({
   onClickShare,
   onClickGenerateCards,
 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const history = useHistory();
 
   const onChangeFieldSize = (e) => {
     onChangeSettings({ ...settings, fieldSize: e.target.value });
   };
   const onChangeDictionary = (e) => {
-    onChangeSettings({ ...settings, dictionary: e.target.value });
+    onChangeSettings({ ...settings, dictionaryFileName: e.target.value });
   };
   const fieldSizes = Object.entries(FIELD_SIZES).map(([label, value]) => (
     <React.Fragment key={value}>
       <Radio label={label} value={value} />
     </React.Fragment>
   ));
-  const dictionaries = Object.entries(CARDS_DICTIONARIES).map(
-    ([label, value]) => (
-      <option key={value} value={value}>
-        {label}
-      </option>
-    ),
+
+  const dictionaries = CARDS_DICTIONARIES.reduce(
+    (acc, { name, fileName, language }) => {
+      if (i18n.language === language) {
+        acc.push(
+          <option key={fileName} value={fileName}>
+            {name}
+          </option>,
+        );
+      }
+      return acc;
+    },
+    [],
   );
 
   let color = 'default';
@@ -127,7 +134,10 @@ function Lobby({
 
         <div className={'mt-5 md:mt-2 row-start-3 col-start-1'}>
           <FormGroup label={t('lobby.dictionary')}>
-            <Select value={settings.dictionary} onChange={onChangeDictionary}>
+            <Select
+              value={settings.dictionaryFileName}
+              onChange={onChangeDictionary}
+            >
               {dictionaries}
             </Select>
           </FormGroup>
@@ -177,7 +187,7 @@ Lobby.propTypes = {
   settings: PropTypes.shape({
     language: PropTypes.string.isRequired,
     fieldSize: PropTypes.string.isRequired,
-    dictionary: PropTypes.string.isRequired,
+    dictionaryFileName: PropTypes.string.isRequired,
   }).isRequired,
   users: PropTypes.arrayOf(
     PropTypes.shape({

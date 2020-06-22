@@ -8,9 +8,28 @@ export const FIELD_SIZES = {
   '5x6': '5x6',
 };
 
-export const CARDS_DICTIONARIES = {
-  GAGA: 'gaga',
-};
+export const CARDS_DICTIONARIES = [
+  {
+    name: 'Стандартный (400+ слов)',
+    fileName: 'default-ru.json',
+    language: 'ru',
+  },
+  {
+    name: 'Расширенный (1000+ слов)',
+    fileName: 'extended-ru.json',
+    language: 'ru',
+  },
+  {
+    name: 'IT: frontend (200+ терминов)',
+    fileName: 'frontend-ru.json',
+    language: 'ru',
+  },
+  {
+    name: 'IT: frontend (200+ words)',
+    fileName: 'frontend-en.json',
+    language: 'en',
+  },
+];
 
 export const CARDS_TYPES = {
   agent: 'agent',

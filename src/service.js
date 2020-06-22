@@ -25,16 +25,16 @@ const DB_CARDS_REF = 'sessions_cards';
  * Инициализация игровой сессии
  * @param language
  * @param fieldSize
- * @param dictionary
+ * @param dictionaryFileName
  * @returns {Promise<{sessionId: string, userId: string}>}
  */
-export async function initialize({ language, fieldSize, dictionary }) {
+export async function initialize({ language, fieldSize, dictionaryFileName }) {
   const { sessionId, userId } = await createSession({
     language,
     fieldSize,
-    dictionary,
+    dictionaryFileName,
   });
-  await setNewCards(sessionId, { dictionary, fieldSize });
+  await setNewCards(sessionId, { dictionaryFileName, fieldSize });
   return { sessionId, userId };
 }
 
@@ -42,10 +42,10 @@ export async function initialize({ language, fieldSize, dictionary }) {
  * Создание игровой сессии
  * @param language
  * @param fieldSize
- * @param dictionary
+ * @param dictionaryFileName
  * @returns {Promise<{sessionId: string, userId: string}>}
  */
-async function createSession({ language, fieldSize, dictionary }) {
+async function createSession({ language, fieldSize, dictionaryFileName }) {
   const sessionRef = database.ref(DB_SESSIONS_REF).push();
   const sessionId = sessionRef.key;
   const sessionPath = getSessionPath(sessionId);
@@ -54,7 +54,7 @@ async function createSession({ language, fieldSize, dictionary }) {
     settings: {
       language,
       fieldSize,
-      dictionary,
+      dictionaryFileName,
     },
     captains: {
       red: '',
@@ -123,13 +123,16 @@ export function setWinnerTeam(sessionId, winnerTeam) {
 /**
  * Установка карточек
  * @param sessionId
- * @param dictionary
+ * @param dictionaryFileName
  * @param fieldSize
  * @returns {Promise<any>}
  */
-export async function setNewCards(sessionId, { dictionary, fieldSize }) {
+export async function setNewCards(
+  sessionId,
+  { dictionaryFileName, fieldSize },
+) {
   const cardsRef = getCardsRef(sessionId);
-  const cards = getGamingCards(dictionary, fieldSize);
+  const cards = await getGamingCards(dictionaryFileName, fieldSize);
   return cardsRef.set(cards);
 }
 
@@ -148,22 +151,22 @@ export async function updateCard(sessionId, cardId) {
  * Сохранение настроек
  * @param sessionId
  * @param language
- * @param dictionary
+ * @param dictionaryFileName
  * @param fieldSize
  * @returns {Promise<any>}
  */
 export async function saveSettings(
   sessionId,
-  { language, dictionary, fieldSize },
+  { language, dictionaryFileName, fieldSize },
 ) {
   const settingsPath = getSettingsPath(sessionId);
   const winnerTeamPath = getWinnerTeamPath(sessionId);
   const cardsPath = getCardsPath(sessionId);
-  const cards = getGamingCards(dictionary, fieldSize);
+  const cards = await getGamingCards(dictionaryFileName, fieldSize);
 
   const updates = {
     [winnerTeamPath]: '',
-    [settingsPath]: { language, dictionary, fieldSize },
+    [settingsPath]: { language, dictionaryFileName, fieldSize },
     [cardsPath]: cards,
   };
   return database.ref().update(updates);

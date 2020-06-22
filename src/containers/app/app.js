@@ -1,21 +1,17 @@
 import { hot } from 'react-hot-loader/root';
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import copy from 'copy-to-clipboard';
 import { withTranslation } from 'react-i18next';
 import { ToastContainer, Slide } from 'react-toastify';
-import {
-  CARDS_DICTIONARIES,
-  CARDS_TYPES,
-  FIELD_SIZES,
-  LANGUAGES,
-  TEAMS,
-} from 'src/data/constants';
+import { CARDS_TYPES, FIELD_SIZES, LANGUAGES, TEAMS } from 'src/data/constants';
 import * as Location from 'src/utils/location';
 import * as FirebaseService from 'src/service';
 import { getRemainingCardsCount } from 'src/utils/team-progress';
 import { toast } from 'src/utils/toast';
 import { Loader } from 'src/components/loader';
+import { getDefaultDictionary } from 'src/utils/data-provider';
 import { Lobby } from '../lobby';
 import { NotFound } from '../not-found';
 import { ProtectedGame } from '../game';
@@ -29,7 +25,7 @@ class App extends Component {
       settings: {
         language: LANGUAGES['ru'],
         fieldSize: FIELD_SIZES['5x5'],
-        dictionary: CARDS_DICTIONARIES['GAGA'],
+        dictionaryFileName: '',
       },
       users: [],
       cards: [],
@@ -46,22 +42,44 @@ class App extends Component {
       isLoading: true,
     };
     this.sessionId = '';
-    // eslint-disable-next-line react/prop-types
     this.t = props.t;
+    this.i18n = props.i18n;
   }
 
   async componentDidMount() {
-    await this.initialize();
+    await this.setDefaultDictionary();
+    await this.initializeSession();
   }
 
-  async initialize() {
+  async initializeSession() {
     try {
       await this.connectToSession();
       this.addListeners();
     } catch (error) {
-      console.log(error.message);
-      this.setState({ errorMessage: error.message });
+      this.setState({ isLoading: false }, () => {
+        toast.error(error.message);
+      });
     }
+  }
+
+  setDefaultDictionary() {
+    return new Promise((resolve) => {
+      const dictionary = getDefaultDictionary(this.i18n.language);
+      if (!dictionary) {
+        this.setState({ isLoading: false }, () => {
+          toast.error(this.t('error.common'));
+        });
+      }
+      this.setState(
+        {
+          settings: {
+            ...this.state.settings,
+            dictionaryFileName: dictionary.fileName,
+          },
+        },
+        resolve,
+      );
+    });
   }
 
   async connectToSession() {
@@ -119,10 +137,10 @@ class App extends Component {
     this.setState({ users, currentUser });
   }
 
-  saveSettings({ language, dictionary, fieldSize }) {
+  saveSettings({ language, dictionaryFileName, fieldSize }) {
     FirebaseService.saveSettings(this.sessionId, {
       language,
-      dictionary,
+      dictionaryFileName,
       fieldSize,
     });
   }
@@ -254,6 +272,11 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  t: PropTypes.func.isRequired,
+  i18n: PropTypes.object.isRequired,
+};
 
 const HotApp = hot(withTranslation()(App));
 

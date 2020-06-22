@@ -22,6 +22,10 @@ const plugins = [
         from: path.resolve(__dirname, 'assets/favicons'),
         to: path.resolve(__dirname, 'public/favicons'),
       },
+      {
+        from: path.resolve(__dirname, 'src/data/dictionaries'),
+        to: path.resolve(__dirname, 'public/dictionaries'),
+      },
     ],
   }),
 ];
